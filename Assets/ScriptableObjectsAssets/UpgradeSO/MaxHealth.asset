@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d9c1ef00063e5243811a25fc2333b54, type: 3}
+  m_Name: MaxHealth
+  m_EditorClassIdentifier: 
+  type: 2
+  upgradeName: Max Health
+  description: MaxHealth
+  maxLevel: 5
+  costs: 50000000960000002c01000058020000b0040000
+  values: 0f00000014000000190000001e00000028000000
+  icon: {fileID: 10901, guid: 0000000000000000f000000000000000, type: 0}
