@@ -10,8 +10,10 @@ public class GameRunTimeManager
 
     # region 单位相关
         public int maxUnitCount = 100;
-        public List<UnitDataEntity> createableUnits = new List<UnitDataEntity>();
-        public List<UnitDataEntity> enemyUnits = new List<UnitDataEntity>();
+        // 对局中可放置单位
+        public List<HexUnitDataSO> playerUnits = new List<HexUnitDataSO>();
+        // 所有敌方单位
+        public List<HexUnitDataSO> enemyUnits = new List<HexUnitDataSO>();
     #endregion
     
     # region 资源相关
@@ -57,7 +59,9 @@ public class GameRunTimeManager
     public GameRunTimeManager(HexGrid grid)
     {
         this.grid = grid;
+        playerUnits = GameManager.Instance.playerUnits;
+        enemyUnits = GameManager.Instance.enemyUnits;
     }
     
-    public int GetUnitNumber(PlayerUnitDataEntity playerUnitDataEntity) => createableUnits.IndexOf(playerUnitDataEntity);
+    public int GetUnitNumber(HexUnitDataSO playerHexUnitDataEntity) => playerUnits.IndexOf(playerHexUnitDataEntity);
 }

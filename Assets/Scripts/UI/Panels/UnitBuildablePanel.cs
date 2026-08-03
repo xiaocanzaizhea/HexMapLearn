@@ -21,7 +21,7 @@ public class UnitBuildablePanel : MonoBehaviour
         }
         
         // 己方单位
-        foreach (var unitSo in GameManager.RunTimeData.createableUnits)
+        foreach (var unitSo in GameManager.RunTimeData.playerUnits)
         {
             // if(unitSo.entityType == EntityType.Building) continue;
             
@@ -30,10 +30,10 @@ public class UnitBuildablePanel : MonoBehaviour
         }
 
         // 敌方单位，测试用
-        foreach (var enemyUnitSo in GameManager.RunTimeData.enemyUnits)
-        {
-            UnitsBuildableItem unitUI = Instantiate(unit, unitParent);
-            unitUI.Setup(enemyUnitSo, this);
-        }
+        // foreach (var enemyUnitSo in GameManager.RunTimeData.enemyUnits)
+        // {
+        //     UnitsBuildableItem unitUI = Instantiate(unit, unitParent);
+        //     unitUI.Setup(enemyUnitSo, this);
+        // }
     }
 }

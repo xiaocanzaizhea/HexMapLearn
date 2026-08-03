@@ -27,15 +27,15 @@ public class UnitBuildPanel : MonoBehaviour, IDropHandler
         var unitsBarUnit = draggedObject.GetComponent<UnitsBuildableItem>();
         if(unitsBarUnit == null) return;
 
-        OnUnitDroppedToList(unitsBarUnit.playerUnitDataEntity);
+        OnUnitDroppedToList(unitsBarUnit.dataSo);
     }
     
-    private void OnUnitDroppedToList(PlayerUnitDataEntity playerUnitDataEntity)
+    private void OnUnitDroppedToList(HexUnitDataSO dataSo)
     {
         UnitBuildItem ub = Instantiate(cloneTarget, cloneParent);
-        if(playerUnitDataEntity.sprite != null) ub.unitImage.sprite = playerUnitDataEntity.sprite;
-        ub.playerUnitDataEntity = playerUnitDataEntity;
-        ub.Time = playerUnitDataEntity.unitBuildTimeRequired;
+        if(dataSo.sprite != null) ub.unitImage.sprite = dataSo.sprite;
+        ub.playerHexUnitDataEntity = dataSo;
+        ub.Time = dataSo.unitBuildTimeRequired;
         ub.unitBuildPanel = this;
         
         unitBuildList.Add(ub);

@@ -7,12 +7,11 @@ using Random = UnityEngine.Random;
 [RequireComponent(typeof(HexGrid))]
 public class UnitGenerate : MonoBehaviour
 {
-    public PlayerUnitDataEntity baseCamp;
+    public HexUnit baseCamp;
     private HexGrid hexGrid;
     
     private void Start()
     {
-        baseCamp = GameManager.Instance.PlayerUnitsData["BaseCamp"];
         hexGrid = GetComponent<HexGrid>();
         StartCoroutine(SetupUnit());
     }
@@ -30,8 +29,7 @@ public class UnitGenerate : MonoBehaviour
         HexCell randomCell = GetRandomCell();
         if (randomCell)
         {
-            var baseCampPrefab = Instantiate(GameManager.AssetLoader
-                .LoadAsset<PlayerUnitDataEntity>("BaseCamp"));
+            var baseCampPrefab = Instantiate(baseCamp.dataSo.prefab);
             hexGrid.AddUnit(baseCampPrefab, randomCell, Random.Range(0, 360), false);
             Debug.Log("基础营地生成成功，位置在" + randomCell.coordinates.ToString());
         }

@@ -9,6 +9,9 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoSingleton<GameManager>
 {
+	public List<HexUnitDataSO> playerUnits = new List<HexUnitDataSO>();
+	public List<HexUnitDataSO> enemyUnits = new List<HexUnitDataSO>();
+	
 	public bool firstTimeEnterGame;
 	
 	public bool completeGameInitialze;
@@ -41,11 +44,11 @@ public class GameManager : MonoSingleton<GameManager>
 	public HexGrid currentActiveHexGrid;
 	
 	// 所有单位
-	private PlayerUnitsData playerUnitsData;
-	public Dictionary<string, PlayerUnitDataEntity> PlayerUnitsData = new Dictionary<string, PlayerUnitDataEntity>();
+	private HexUnit playerUnitsData;
+	public Dictionary<string, HexUnit> PlayerUnitsData = new Dictionary<string, HexUnit>();
 	
-	private EnemiesData enemiesData;
-	public Dictionary<string, EnemyDataEntity> EnemyData = new Dictionary<string, EnemyDataEntity>();
+	private HexUnit enemiesData;
+	public Dictionary<string, HexUnit> EnemyData = new Dictionary<string, HexUnit>();
 	
 	private GameBuffData gameBuffData;
 	public Dictionary<int, GameBuffDataEntity> GameBuffData = new Dictionary<int, GameBuffDataEntity>();
@@ -113,24 +116,24 @@ public class GameManager : MonoSingleton<GameManager>
 		mGamePropsBehaviorManager = new GamePropsBehaviorManager();
 		mGameMessageManager = new GameMessageManager();
 		mGameAudioManager = new GameAudioManager(BGMAudioSource,SceneAudioSource,UIAudioSource);
-		// GameManager.Event.Register("SceneChange", new GameEvent<string>(OnSceneChanged));
+		Event.Register("SceneChange", new GameEvent<string>(OnSceneChanged));
 	}
 
 	private async void Start()
 	{
 		// player unit data
-		playerUnitsData = await AssetLoader.LoadAsset<PlayerUnitsData>("PlayerUnitsData");
-		foreach (var data in playerUnitsData.data)
-		{
-			PlayerUnitsData.Add(data.id, data);
-		}
-		
-		// enemy data
-		enemiesData = await AssetLoader.LoadAsset<EnemiesData>("EnemiesData");
-		foreach (var data in enemiesData.data)
-		{
-			EnemyData.Add(data.Id, data);
-		}
+		// playerUnitsData = await AssetLoader.LoadAsset<HexUnit>("PlayerUnitsData");
+		// foreach (var data in playerUnitsData.dataSo)
+		// {
+		// 	PlayerUnitsData.Add(data.id, data);
+		// }
+		//
+		// // enemy data
+		// enemiesData = await AssetLoader.LoadAsset<HexUnit>("EnemiesData");
+		// foreach (var data in enemiesData.dataSo)
+		// {
+		// 	EnemyData.Add(data.Id, data);
+		// }
 		
 		// game buff
 		// gameBuffData = await AssetLoader.LoadAsset<GameBuffData>("GameBuffData");
@@ -161,7 +164,7 @@ public class GameManager : MonoSingleton<GameManager>
 				if (ao.isDone)
 				{
 					Debug.Log(previousSceneName + " -> " + loadedScene.Scene.name);
-					// GameManager.Event.Broadcast("SceneChange");
+					Event.Broadcast("SceneChange", new GameEventParameter<string>(loadedScene.Scene.name));
 				}
 			};
 			readyToActiveLoadedScene = false;

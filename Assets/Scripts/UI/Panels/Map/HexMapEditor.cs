@@ -153,7 +153,7 @@ namespace Map
 		
 			if (cell && !cell.Unit) {
 				hexGrid.AddUnit(
-					Instantiate(unit.playerUnitDataEntity.prefab)
+					Instantiate(unit.dataSo.prefab)
 					, cell, Random.Range(0f, 360f)
 				);
 			}

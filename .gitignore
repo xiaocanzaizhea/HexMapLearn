@@ -8,6 +8,7 @@
 /obj/
 /Logs/
 /UserSettings/
+/.idea/
 
 # ====================
 # VS / IDE 生成的文件

@@ -9,17 +9,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4bc76329c6674dd2977926210eeea14c, type: 3}
+  m_Script: {fileID: 11500000, guid: 63dd5053313345f49bcbdcc1a2aeef0f, type: 3}
   m_Name: Archer
   m_EditorClassIdentifier: 
   id: Archer
-  sprite: {fileID: 0}
-  maxhp: 100
-  attack: 15
-  defense: 20
-  moveRange: 3
-  sightRange: 3
+  sprite: {fileID: 10911, guid: 0000000000000000f000000000000000, type: 0}
+  prefab: {fileID: 7026381296043399553, guid: df529deb0c6ddf04090155483b03d025, type: 3}
+  maxhp: 20
+  attack: 2
+  defense: 2
+  moveRange: 2
+  sightRange: 2
   unitValue: 25
   unitOccupancySize: 1
-  unitBuildTimeRequired: 1
-  retreatTimeRequired: 2
+  unitBuildTimeRequired: 2
+  retreatTimeRequired: 3
+  campType: 1
