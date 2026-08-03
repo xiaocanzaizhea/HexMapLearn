@@ -42,10 +42,10 @@ public class HexGrid : MonoBehaviour{
 	int currentCenterColumnIndex = -1;
 
 	[Tooltip("友方单位列表")]
-	public List<PlayerUnit> playerUnits = new List<PlayerUnit>();
+	public List<HexUnit> playerUnits = new List<HexUnit>();
 	
 	[Tooltip("敌方单位列表")]
-	public List<EnemyUnit> enemyUnits = new List<EnemyUnit>();
+	public List<HexUnit> enemyUnits = new List<HexUnit>();
 
 	HexCellShaderData cellShaderData;
 
@@ -73,10 +73,10 @@ public class HexGrid : MonoBehaviour{
 		unit.Location = location;
 		unit.Orientation = orientation;
 
-		if (unit.playerUnitDataEntity.campType == 0)
-			playerUnits.Add((PlayerUnit)unit);
-		else
-			enemyUnits.Add((EnemyUnit)unit);
+		if (unit is HexUnit player)
+			playerUnits.Add(player);
+		else if (unit is HexUnit enemy)
+			enemyUnits.Add(enemy);
 		
 		if(trigger) EventManager.Instance.TriggerUnitSpawn(unit);
 	}
@@ -567,11 +567,11 @@ public class HexGrid : MonoBehaviour{
 		}
 	}
 
-	public PlayerUnit FindPlayerInVisionRange(EnemyUnit enemy)
+	public HexUnit FindPlayerInVisionRange(HexUnit enemy)
 	{
 		if (enemy == null || enemy.Location == null) return null;
 		
-		PlayerUnit nearest = null;
+		HexUnit nearest = null;
 		int minDistance = int.MaxValue;
 		int visionRange = enemy.VisionRange;
 
@@ -595,11 +595,11 @@ public class HexGrid : MonoBehaviour{
 		return nearest;
 	}
 	
-	public EnemyUnit FindEnemyInVisionRange(PlayerUnit player)
+	public HexUnit FindEnemyInVisionRange(HexUnit player)
 	{
 		if (player == null || player.Location == null) return null;
     
-		EnemyUnit nearest = null;
+		HexUnit nearest = null;
 		int minDistance = int.MaxValue;
 		int visionRange = player.VisionRange;
 

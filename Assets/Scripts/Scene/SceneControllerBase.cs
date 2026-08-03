@@ -11,10 +11,11 @@ public class SceneControllerBase : MonoBehaviour
 
     protected virtual async void Awake()
     {
-        sceneName = this.GetType().GetCustomAttribute<SceneControllerAttribute>().SceneName;
+        sceneName = GetType().GetCustomAttribute<SceneControllerAttribute>().SceneName;
         // 注册场景
         GameManager.Scene.Register(sceneName,this);
-        isGameScene = this.GetType().GetCustomAttribute<SceneControllerAttribute>().isGameScene;
+        // 注册事件
+        isGameScene = GetType().GetCustomAttribute<SceneControllerAttribute>().isGameScene;
         GameManager.Input.playerInputControl.GamePlay.Enable();
         if (isGameScene)
         {
@@ -28,29 +29,21 @@ public class SceneControllerBase : MonoBehaviour
         if(loadToAnotherScene) return;
         if (isGameScene)
         {
-            if (GameManager.Input.State.SwitchPause)
-            {
-                if (GameManager.UI.IsShow<PauseMenuPanel>())
-                {
-                    GameManager.UI.HidePanel<PauseMenuPanel>();
-                    GameManager.TimeScale.ResetTime();
-                    GameManager.Camera.EnableCamera("MainCMCamera", true);
-                }
-                else
-                {
-                    GameManager.UI.ShowPanel<PauseMenuPanel>();
-                    GameManager.TimeScale.ScaleTime(0, -1f);
-                    GameManager.Camera.DisableCamera("MainCMCamera", true);
-                }
-            }
-
-            if (GameManager.Input.State.LeftMouseClick)
-            {
-                if (SightOnNPC())
-                {
-                    
-                }
-            }
+            // if (GameManager.Input.State.SwitchPause)
+            // {
+            //     if (GameManager.UI.IsShow<PauseMenuPanel>())
+            //     {
+            //         GameManager.UI.HidePanel<PauseMenuPanel>();
+            //         GameManager.TimeScale.ResetTime();
+            //         GameManager.Camera.EnableCamera("MainCMCamera", true);
+            //     }
+            //     else
+            //     {
+            //         GameManager.UI.ShowPanel<PauseMenuPanel>();
+            //         GameManager.TimeScale.ScaleTime(0, -1f);
+            //         GameManager.Camera.DisableCamera("MainCMCamera", true);
+            //     }
+            // }
         }
     }
 

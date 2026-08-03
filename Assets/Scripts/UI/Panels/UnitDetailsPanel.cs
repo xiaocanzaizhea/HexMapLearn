@@ -32,7 +32,7 @@ public class UnitDetailsPanel : BasePanel
     void UpdateUnitDetails(HexUnit unit, bool isMapUnit)
     {
         this.unitName.text = unit.Id;
-        this.unitImage.sprite = unit.playerUnitDataEntity.sprite;
+        this.unitImage.sprite = unit.sprite;
         
         this.unitTarget.text = isMapUnit ? "Map Unit" : "Unit";
         SetupAttributes(unit, isMapUnit);
@@ -40,14 +40,14 @@ public class UnitDetailsPanel : BasePanel
         if (isMapUnit)
         {
             this.unitHealth.gameObject.SetActive(true);
-            this.unitHealth.value = (float)unit.health / unit.playerUnitDataEntity.maxHealth;
+            this.unitHealth.value = (float)unit.Health / unit.dataSo.maxhp;
         }
         else
         {
             this.unitHealth.gameObject.SetActive(false);
         }
 
-        if (unit is PlayerUnit playerUnit)
+        if (unit is HexUnit playerUnit)
         {
             SetupPlayerUnit(playerUnit, isMapUnit);
         }
@@ -59,8 +59,8 @@ public class UnitDetailsPanel : BasePanel
         // 先清理
         foreach (Transform child in attributeParent) Destroy(child.gameObject);
 
-        int attack = isMapUnit ? unit.attackPower : unit.playerUnitDataEntity.attackArgs.attackPower;
-        int defense = isMapUnit ? unit.defense : unit.playerUnitDataEntity.defense;
+        int attack = isMapUnit ? unit.AttackPower : unit.dataSo.attack;
+        int defense = isMapUnit ? unit.Defense : unit.dataSo.defense;
         
         // 攻击图标
         AddAttributeItem(GameResource.Instance.attackImage, attack.ToString());
@@ -70,16 +70,17 @@ public class UnitDetailsPanel : BasePanel
         // AddAttributeItem(GameResource.Instance.sanityImage, sanity.ToString());
     }
 
-    void SetupPlayerUnit(PlayerUnit unit, bool isMapUnit)
+    void SetupPlayerUnit(HexUnit unit, bool isMapUnit)
     {
-        if (!isMapUnit || !unit.CanRetreat())
+        var retreatTimeRequired = unit.dataSo.retreatTimeRequired;
+        if (!isMapUnit)
         {
             retreatButton.gameObject.SetActive(false);
             return;
         }
 
         retreatButton.gameObject.SetActive(true);
-        if (unit.Retreat == -1)
+        if (retreatTimeRequired == -1)
         {
             SetButton("Retreat", () => unit.StartRetreat());
         }
@@ -87,8 +88,6 @@ public class UnitDetailsPanel : BasePanel
         {
             SetButton("CancelRetreat", () => unit.CancelRetreat());
         }
-        
-        unitLevelText.text = unit.Level.ToString();
     }
 
     public void SetButton(string label, Action action)

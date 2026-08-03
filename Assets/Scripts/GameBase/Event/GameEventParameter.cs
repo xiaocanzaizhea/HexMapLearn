@@ -2,6 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+public class GameEventParameter : IGameEventParameter
+{
+    private static GameEventParameter instance;
+    public static GameEventParameter Empty => instance ??= new GameEventParameter();
+    
+    private GameEventParameter() { }
+}
 public class GameEventParameter<T1> : IGameEventParameter
 {
     public T1 param1;
@@ -34,5 +42,6 @@ public class GameEventParameter<T1, T2,T3> : IGameEventParameter
 }
 public interface IGameEventParameter 
 {
+    
 }
 

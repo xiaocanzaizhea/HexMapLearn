@@ -10,8 +10,8 @@ public class UnitBuildItem : MonoBehaviour, IPointerClickHandler
 {
     public Image unitImage;
     public TextMeshProUGUI timeUI;
-    [FormerlySerializedAs("unitDataEntity")] [FormerlySerializedAs("unitSo")] [HideInInspector]
-    public UnitDataEntity playerUnitDataEntity;
+    [FormerlySerializedAs("playerUnitDataEntity")] [HideInInspector]
+    public HexUnitDataSO playerHexUnitDataEntity;
     [FormerlySerializedAs("unitBuildList")] public UnitBuildPanel unitBuildPanel;
 
     public int Time

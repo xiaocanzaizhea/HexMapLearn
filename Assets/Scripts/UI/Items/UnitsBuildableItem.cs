@@ -7,16 +7,15 @@ using UnityEngine.EventSystems;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
 
-public class UnitsBuildableItem : MonoBehaviour, 
-    IDragHandler, IBeginDragHandler, IEndDragHandler, IPointerClickHandler, 
-    IUnitBuildHandler, IUnitSpawnHandler
+public class UnitsBuildableItem : MonoBehaviour
+    , IPointerClickHandler, IDragHandler, IEndDragHandler, IBeginDragHandler
 {
     public Image image;
     public TextMeshProUGUI text;
     public GameObject highLight;
     public TextMeshProUGUI cntUI;
-    [FormerlySerializedAs("unitDataEntity")] [FormerlySerializedAs("unitSo")] [HideInInspector]
-    public UnitDataEntity playerUnitDataEntity;
+    [HideInInspector]
+    public HexUnitDataSO dataSo;
     
     private GameObject obj; // 跟随鼠标移动的临时物体
     
@@ -43,41 +42,13 @@ public class UnitsBuildableItem : MonoBehaviour,
         highLight.GetComponent<Image>().enabled = true;
     }
 
-    public void Setup(UnitDataEntity playerUnitDataEntity, UnitBuildablePanel unitBuildablePanel)
+    public void Setup(HexUnitDataSO hexUnitSo, UnitBuildablePanel unitBuildablePanel)
     {
-        this.playerUnitDataEntity = playerUnitDataEntity;
-        this.text.text = playerUnitDataEntity.name;
-        this.image.sprite = playerUnitDataEntity.sprite;
+        this.dataSo = hexUnitSo;
+        this.text.text = hexUnitSo.name;
+        this.image.sprite = hexUnitSo.sprite;
         this._unitBuildablePanel = unitBuildablePanel;
         this.cnt = 0;
-    }
-
-    private void OnEnable()
-    {
-        EventManager.Instance.AddListener_UnitBuild(OnUnitBuild);
-        EventManager.Instance.AddListener_UnitSpawn(OnUnitSpawn);
-    }
-
-    private void OnDisable()
-    {
-        EventManager.Instance.RemoveListener_UnitBuild(OnUnitBuild);
-        EventManager.Instance.RemoveListener_UnitSpawn(OnUnitSpawn);
-    }
-    
-    public void OnUnitBuild(HexUnit unit)
-    {
-        if (unit.playerUnitDataEntity == playerUnitDataEntity)
-        {
-            UnitCount += 1;
-        }
-    }
-    
-    public void OnUnitSpawn(HexUnit unit)
-    {
-        if (unit.playerUnitDataEntity == playerUnitDataEntity)
-        {
-            UnitCount -= 1;
-        }
     }
 
     public void OnBeginDrag(PointerEventData eventData)
@@ -87,7 +58,7 @@ public class UnitsBuildableItem : MonoBehaviour,
         obj.transform.SetAsLastSibling();
         
         var ghostImage = obj.AddComponent<Image>();
-        var sprite = playerUnitDataEntity.sprite;
+        var sprite = dataSo.sprite;
         if(sprite != null) ghostImage.sprite = sprite;
         ghostImage.raycastTarget = false; 
         
@@ -129,9 +100,7 @@ public class UnitsBuildableItem : MonoBehaviour,
             }
             
             _unitBuildablePanel.currentSelectedUnit = this;
-            this.SetSelected();
-            
-            EventManager.Instance.TriggerUnitSelection(this.playerUnitDataEntity.prefab, false);
+            SetSelected();
         }
     }
     

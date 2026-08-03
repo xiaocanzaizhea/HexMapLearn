@@ -11,7 +11,8 @@ public class GameMessageManager
 
 	public GameMessageManager() 
 	{
-		GameManager.Event.Register("ShowMessage",new GameEvent<string,string,MessagePriority>(RegisterMessage));
+		GameManager.Event.Register("ShowMessage"
+			,new GameEvent<string,string,MessagePriority>(RegisterMessage));
 	}
 
 	public void ProcessPushMessage() 
@@ -74,7 +75,8 @@ public class GameMessageManager
 		}
 	}
 
-	public void RegisterMessage(string message,string sound = "noone",MessagePriority priority = MessagePriority.Normal)
+	public void RegisterMessage(string message,string sound = "noone"
+		,MessagePriority priority = MessagePriority.Normal)
 	{
 		gameMessageQueue.Enqueue(new GameMessage() 
 		{

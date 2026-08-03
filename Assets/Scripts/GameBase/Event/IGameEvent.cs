@@ -50,7 +50,7 @@ public class GameEvent<T1, T2> : IGameEvent
 public class GameEvent<T1, T2,T3> : IGameEvent
 {
     private Action<T1, T2,T3> threeParamCallBack;
-    public GameEvent(Action<T1, T2,T3> threeParamCallBack)
+    public GameEvent(Action<T1, T2, T3> threeParamCallBack)
     {
         this.threeParamCallBack = threeParamCallBack;
     }
