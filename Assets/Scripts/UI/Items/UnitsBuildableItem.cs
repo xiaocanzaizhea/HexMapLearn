@@ -18,8 +18,6 @@ public class UnitsBuildableItem : MonoBehaviour
     public HexUnitDataSO dataSo;
     
     private GameObject obj; // 跟随鼠标移动的临时物体
-    
-    private UnitBuildablePanel _unitBuildablePanel;
 
     public int UnitCount
     {
@@ -46,8 +44,7 @@ public class UnitsBuildableItem : MonoBehaviour
     {
         this.dataSo = hexUnitSo;
         this.text.text = hexUnitSo.name;
-        this.image.sprite = hexUnitSo.sprite;
-        this._unitBuildablePanel = unitBuildablePanel;
+        this.image.sprite = hexUnitSo.icon;
         this.cnt = 0;
     }
 
@@ -58,7 +55,7 @@ public class UnitsBuildableItem : MonoBehaviour
         obj.transform.SetAsLastSibling();
         
         var ghostImage = obj.AddComponent<Image>();
-        var sprite = dataSo.sprite;
+        var sprite = dataSo.icon;
         if(sprite != null) ghostImage.sprite = sprite;
         ghostImage.raycastTarget = false; 
         
@@ -84,13 +81,13 @@ public class UnitsBuildableItem : MonoBehaviour
     {
         if (eventData.button == PointerEventData.InputButton.Left)
         {
-            UnitsBuildableItem currentSelectedUnit = _unitBuildablePanel.currentSelectedUnit;
+            UnitsBuildableItem currentSelectedUnit = GameManager.RunTimeData.CurrentSelectedUnitInUI;
 
             if (currentSelectedUnit == this) //两次点击
             {
-                EventManager.Instance.TriggerUnitUnSelection();
+                // EventManager.Instance.TriggerUnitUnSelection();
                 currentSelectedUnit.RemoveSelected();
-                _unitBuildablePanel.currentSelectedUnit = null;
+                GameManager.RunTimeData.CurrentSelectedUnitInUI = null;
                 return;
             }
             
@@ -99,7 +96,7 @@ public class UnitsBuildableItem : MonoBehaviour
                 currentSelectedUnit.RemoveSelected();
             }
             
-            _unitBuildablePanel.currentSelectedUnit = this;
+            GameManager.RunTimeData.CurrentSelectedUnitInUI = this;
             SetSelected();
         }
     }

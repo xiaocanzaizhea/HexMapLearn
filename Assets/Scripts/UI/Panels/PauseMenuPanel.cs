@@ -1,4 +1,5 @@
-﻿using UnityEngine.UI;
+﻿using UnityEngine;
+using UnityEngine.UI;
 
 public class PauseMenuPanel : BasePanel
 {
@@ -17,11 +18,12 @@ public class PauseMenuPanel : BasePanel
     
     private void OnOptionButtonClick()
     {
+        
     }
 
     private void OnSaveGameButtonClick()
     {
-         GameManager.Files.SaveGameFiles();
+        GameManager.Files.SaveGameFiles();
         GameManager.Event.Broadcast("SwitchGamePause", new GameEventParameter<bool>(false));
     }
 

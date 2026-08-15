@@ -12,6 +12,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Base Camp
       objectReference: {fileID: 0}
+    - target: {fileID: 1926056678881898, guid: 5661a1efcb9464721b4db3f694ded559, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4173746415363472, guid: 5661a1efcb9464721b4db3f694ded559, type: 3}
       propertyPath: m_LocalScale.x
       value: 5
@@ -89,8 +93,9 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: dba98e024d39bf14287218b072176871, type: 2}
     m_RemovedComponents:
-    - {fileID: 3508153691473552129, guid: 5661a1efcb9464721b4db3f694ded559, type: 3}
-    m_RemovedGameObjects: []
+    - {fileID: 0}
+    m_RemovedGameObjects:
+    - {fileID: 3487937183922828486, guid: 5661a1efcb9464721b4db3f694ded559, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 1716964107277084, guid: 5661a1efcb9464721b4db3f694ded559, type: 3}

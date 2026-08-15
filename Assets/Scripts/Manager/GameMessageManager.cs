@@ -7,7 +7,7 @@ public class GameMessageManager
 	public bool processPushMessage;
 	public float showTime = 2;
 	public float timer = 0;
-	private PlayerMainInfoPanel panel;
+	public PlayerMainInfoPanel panel;
 
 	public GameMessageManager() 
 	{
