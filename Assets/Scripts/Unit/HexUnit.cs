@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
@@ -10,8 +11,11 @@ public class HexUnit : MonoBehaviour {
 
 	public HexUnitDataSO dataSo;
 	
+	private Animator animator;
+
+	public bool IsPlayer => dataSo.team == UnitTeam.Player;
 	public string Id => dataSo.id;
-	public Sprite sprite => dataSo.sprite;
+	public Sprite Icon => dataSo.icon;
 
 	public int Health => 1;
 
@@ -64,6 +68,11 @@ public class HexUnit : MonoBehaviour {
 	float orientation;
 
 	List<HexCell> pathToTravel;
+
+	private void Awake()
+	{
+		animator = GetComponentInChildren<Animator>();
+	}
 
 	public void ValidateLocation () {
 		transform.localPosition = location.Position;
@@ -216,7 +225,7 @@ public class HexUnit : MonoBehaviour {
 		location.coordinates.Save(writer);
 		writer.Write(orientation);
 		writer.Write(GameManager.RunTimeData.GetUnitNumber(dataSo));
-		writer.Write(dataSo.campType == CampType.Player ? 0 : 1);
+		writer.Write(dataSo.team == UnitTeam.Player ? 0 : 1);
 	}
 
 	public static void Load (BinaryReader reader, HexGrid grid) {
@@ -257,6 +266,12 @@ public class HexUnit : MonoBehaviour {
 	public void CancelRetreat()
 	{
 		
+	}
+
+	void InitialAnimtorParam()
+	{
+		animator.SetBool(Settings.IsMoving, false);
+		animator.SetBool(Settings.IsDead, false);
 	}
 
 //	void OnDrawGizmos () {

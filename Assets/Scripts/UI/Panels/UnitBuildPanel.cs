@@ -11,6 +11,38 @@ public class UnitBuildPanel : MonoBehaviour, IDropHandler
     
     private List<UnitBuildItem> unitBuildList = new List<UnitBuildItem>();
 
+    private void OnEnable()
+    {
+        GameManager.Event.Register(HexEvents.NextRound.ToString(), new GameEvent(OnNextRound));
+    }
+
+    private void OnDisable()
+    {
+        GameManager.Event.Unregister(HexEvents.NextRound.ToString(), new GameEvent(OnNextRound));
+    }
+
+    void OnNextRound()
+    {
+        if (unitBuildList.Count > 0)
+        {
+            var unitBuildItem = unitBuildList[0];
+            if (unitBuildItem.Time <= 0)
+            {
+                if(unitBuildItem.dataSo.unitValue > GameManager.RunTimeData.ResourceCount) return;
+                GameManager.Event.Broadcast(HexEvents.ResourceChange.ToString(),
+                    new GameEventParameter<int>(-unitBuildItem.dataSo.unitValue));
+                GameManager.Event.Broadcast(HexEvents.UnitBuildSuccess.ToString(),
+                    new GameEventParameter<string>(unitBuildItem.dataSo.id));
+                unitBuildList.RemoveAt(0);
+                Destroy(cloneParent.GetChild(0).gameObject);
+            }
+            else
+            {
+                unitBuildItem.Time -= 1;
+            }
+        }
+    }
+
     public void Init()
     {
         foreach (Transform child in cloneParent)
@@ -33,8 +65,8 @@ public class UnitBuildPanel : MonoBehaviour, IDropHandler
     private void OnUnitDroppedToList(HexUnitDataSO dataSo)
     {
         UnitBuildItem ub = Instantiate(cloneTarget, cloneParent);
-        if(dataSo.sprite != null) ub.unitImage.sprite = dataSo.sprite;
-        ub.playerHexUnitDataEntity = dataSo;
+        if(dataSo.icon != null) ub.unitImage.sprite = dataSo.icon;
+        ub.dataSo = dataSo;
         ub.Time = dataSo.unitBuildTimeRequired;
         ub.unitBuildPanel = this;
         

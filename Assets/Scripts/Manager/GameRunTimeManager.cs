@@ -8,38 +8,34 @@ public class GameRunTimeManager
 {
     public HexGrid grid;
 
-    # region 单位相关
-        public int maxUnitCount = 100;
-        // 对局中可放置单位
-        public List<HexUnitDataSO> playerUnits = new List<HexUnitDataSO>();
-        // 所有敌方单位
-        public List<HexUnitDataSO> enemyUnits = new List<HexUnitDataSO>();
-    #endregion
+    public int maxUnitCount = 100;
+    // 对局中可放置单位
+    public List<HexUnitDataSO> playerUnits = new List<HexUnitDataSO>();
+    // 所有敌方单位
+    public List<HexUnitDataSO> enemyUnits = new List<HexUnitDataSO>();
     
-    # region 资源相关
-        // 开始赠送的资源数目
-        public int startResourceCount = 100;
-        // 最大资源数
-        public int maxResourceCount = 1000;
-    # endregion
+    // 开始赠送的资源数目
+    public int startResourceCount = 100;
+    // 最大资源数
+    public int maxResourceCount = 1000;
     
     // 每回合最大行动次数
     public int playerMaxActionCount;
-
-    public UnitsBuildableItem CurrentSelectedUnitInUI => null;
     
-    private EventManager eventManager => EventManager.Instance;
+    public UnitsBuildableItem CurrentSelectedUnitInUI
+    {
+        get;
+        set;
+    }
+
+    public HexUnit CurrentUnitInMap
+    {
+        get;
+        set;
+    }
 
     public int enemyUnitStartCount;
     
-    // 玩家行动次数
-    public int PlayerActionCount
-    {
-        get => playerActionCount;
-        set => playerActionCount = value;
-    }
-    private int playerActionCount;
-
     // 玩家资源数
     public int ResourceCount
     {
@@ -56,9 +52,13 @@ public class GameRunTimeManager
     }
     private int unitCount;
 
-    public GameRunTimeManager(HexGrid grid)
+    void OnGameStart()
     {
-        this.grid = grid;
+        ResourceCount += startResourceCount;
+    }
+
+    public GameRunTimeManager()
+    {
         playerUnits = GameManager.Instance.playerUnits;
         enemyUnits = GameManager.Instance.enemyUnits;
     }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using Map;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -32,7 +33,7 @@ public class PlayerMainInfoPanel : BasePanel
 		UnitBuildablePanel.Init();
 		NextRoundButton.onClick.AddListener((() =>
 		{
-			GameManager.Event.Broadcast(Events.NextRound.ToString(), GameEventParameter.Empty);
+			GameManager.Event.Broadcast(HexEvents.NextRound.ToString(), GameEventParameter.Empty);
 		}));
 		MessageText.text = "Message";
 		MessagePanel.alpha = 0;
@@ -42,21 +43,21 @@ public class PlayerMainInfoPanel : BasePanel
 	{
 		base.Awake();
 		
-		GameManager.Event.Register(Events.ResourceChange.ToString(), new GameEvent<int>(UpdateResource));
+		GameManager.Event.Register(HexEvents.ResourceChange.ToString(), new GameEvent<int>(UpdateResource));
 		
-		GameManager.Event.Register(Events.UnitCountChange.ToString(), new GameEvent<int>(UpdateUnitCount));
+		GameManager.Event.Register(HexEvents.UnitCountChange.ToString(), new GameEvent<int>(UpdateUnitCount));
 	}
 
 	private void OnDestroy()
 	{
-		GameManager.Event.Unregister(Events.ResourceChange.ToString(), new GameEvent<int>(UpdateResource));
+		GameManager.Event.Unregister(HexEvents.ResourceChange.ToString(), new GameEvent<int>(UpdateResource));
 		
-		GameManager.Event.Unregister(Events.UnitCountChange.ToString(), new GameEvent<int>(UpdateUnitCount));
+		GameManager.Event.Unregister(HexEvents.UnitCountChange.ToString(), new GameEvent<int>(UpdateUnitCount));
 	}
 
 	void UpdateResource(int value)
 	{
-		GameManager.RunTimeData.ResourceCount -= value;
+		GameManager.RunTimeData.ResourceCount += value;
 		UpdateResourceText();
 	}
 	void UpdateResourceText()

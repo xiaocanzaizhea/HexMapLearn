@@ -20,7 +20,7 @@ public class GameManager : MonoSingleton<GameManager>
 	
 	public bool readyToActiveLoadedScene;
 	
-	public bool isPause => GameManager.UI.IsShow<PauseMenuPanel>();
+	public bool isPause => UI.IsShow<PauseMenuPanel>();
 	
 	public SceneInstance loadedScene 
 	{
@@ -40,8 +40,6 @@ public class GameManager : MonoSingleton<GameManager>
 	public PlayerDataInstance playerData;
 	
 	public PlayerDataEntitySO PlayerInitialData;
-	
-	public HexGrid currentActiveHexGrid;
 	
 	// 所有单位
 	private HexUnit playerUnitsData;
@@ -104,7 +102,7 @@ public class GameManager : MonoSingleton<GameManager>
 		base.Awake();
 		DontDestroyOnLoad(gameObject);
 		mGameEventManager = new GameEventManager();
-		mGameRunTimeManager = new GameRunTimeManager(currentActiveHexGrid);
+		mGameRunTimeManager = new GameRunTimeManager();
 		mGameAssetLoader = new GameAssetLoader();
 		mGameFilesManager = new GameFilesManager();
 		mGameInputManager = new GameInputManager();
@@ -116,7 +114,7 @@ public class GameManager : MonoSingleton<GameManager>
 		mGamePropsBehaviorManager = new GamePropsBehaviorManager();
 		mGameMessageManager = new GameMessageManager();
 		mGameAudioManager = new GameAudioManager(BGMAudioSource,SceneAudioSource,UIAudioSource);
-		Event.Register("SceneChange", new GameEvent<string>(OnSceneChanged));
+		Event.Register(HexEvents.SceneChange.ToString(), new GameEvent<string>(OnSceneChanged));
 	}
 
 	private async void Start()
@@ -164,7 +162,8 @@ public class GameManager : MonoSingleton<GameManager>
 				if (ao.isDone)
 				{
 					Debug.Log(previousSceneName + " -> " + loadedScene.Scene.name);
-					Event.Broadcast("SceneChange", new GameEventParameter<string>(loadedScene.Scene.name));
+					Event.Broadcast(HexEvents.SceneChange.ToString(), 
+						new GameEventParameter<string>(loadedScene.Scene.name));
 				}
 			};
 			readyToActiveLoadedScene = false;

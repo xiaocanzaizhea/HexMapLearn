@@ -123,7 +123,7 @@ namespace Map
 
 		public override void Init()
 		{
-			
+			hexGrid = GameManager.RunTimeData.grid;
 		}
 
 		void Update () {

@@ -78,7 +78,9 @@ public class HexGrid : MonoBehaviour{
 		else if (unit is HexUnit enemy)
 			enemyUnits.Add(enemy);
 		
-		if(trigger) EventManager.Instance.TriggerUnitSpawn(unit);
+		if(trigger) 
+			GameManager.Event.Broadcast(HexEvents.UnitSpawn.ToString(), 
+			new GameEventParameter<string>(unit.dataSo.id));
 	}
 
 	public void RemoveUnit (HexUnit unit) {

@@ -20,8 +20,6 @@ public class UnitDetailsPanel : BasePanel
     public Button retreatButton;
     public TextMeshProUGUI buttonText;
     
-    public TextMeshProUGUI unitLevelText;
-    public Image unitLevelImage;
     public List<Color> levelImageColors;
 
     public override void Init()
@@ -32,7 +30,7 @@ public class UnitDetailsPanel : BasePanel
     void UpdateUnitDetails(HexUnit unit, bool isMapUnit)
     {
         this.unitName.text = unit.Id;
-        this.unitImage.sprite = unit.sprite;
+        this.unitImage.sprite = unit.Icon;
         
         this.unitTarget.text = isMapUnit ? "Map Unit" : "Unit";
         SetupAttributes(unit, isMapUnit);

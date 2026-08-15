@@ -56,13 +56,13 @@
     <Compile Include="Assets\InputMap\PlayerInputControl.cs" />
     <Compile Include="Assets\Scripts\UI\Panels\PlayerMainInfoPanel.cs" />
     <Compile Include="Assets\Scripts\Character\Player\PlayerController.cs" />
-    <Compile Include="Assets\Scripts\Manager\EventManager.cs" />
     <Compile Include="Assets\Scripts\Manager\GameInputManager.cs" />
     <Compile Include="Assets\Scripts\GameBase\Res\GameAssetLoader.cs" />
     <Compile Include="Assets\Scripts\GameSound\GameSoundDataSO.cs" />
     <Compile Include="Assets\Scripts\UI\Items\UnitBuildItem.cs" />
     <Compile Include="Assets\Scripts\UI\Panels\UnitBuildablePanel.cs" />
     <Compile Include="Assets\Scripts\MapGen\HexCellPriorityQueue.cs" />
+    <Compile Include="Assets\Scripts\GamePlay\InitialHexMap.cs" />
     <Compile Include="Assets\Scripts\Unit\SO\HexUnitDataSO.cs" />
     <Compile Include="Assets\Scripts\Events\Interfaces\IGameEventHandlers.cs" />
     <Compile Include="Assets\Scripts\GameBuff\GameBuffInstance.cs" />
@@ -70,19 +70,19 @@
     <Compile Include="Assets\Scripts\GameProps\GamePropBehaviorBase.cs" />
     <Compile Include="Assets\Scripts\MapGen\ListPool.cs" />
     <Compile Include="Assets\Scripts\Manager\GameFilesManager.cs" />
-    <Compile Include="Assets\Scripts\GamePlay\UnitGenerate.cs" />
     <Compile Include="Assets\Scripts\MapGen\Bezier.cs" />
     <Compile Include="Assets\Scripts\Manager\GameSceneManager.cs" />
     <Compile Include="Assets\Scripts\UI\Panels\Map\SaveLoadItem.cs" />
     <Compile Include="Assets\Scripts\GameBase\Event\IGameEvent.cs" />
-    <Compile Include="Assets\Scripts\GameBase\Event\Events.cs" />
     <Compile Include="Assets\Scripts\UI\Panels\Map\HexMapEditor.cs" />
+    <Compile Include="Assets\Scripts\Unit\FSM.cs" />
     <Compile Include="Assets\Scripts\MapGen\HexMetrics.cs" />
     <Compile Include="Assets\Scripts\Manager\GamePropsBehaviorManager.cs" />
     <Compile Include="Assets\Scripts\UI\MainCanvas.cs" />
     <Compile Include="Assets\Scripts\Scene\VillageSceneController.cs" />
     <Compile Include="Assets\Scripts\UI\Items\UnitDetailsItem.cs" />
     <Compile Include="Assets\Scripts\GameBuff\GameBuffDataEntity.cs" />
+    <Compile Include="Assets\Scripts\Unit\Settings.cs" />
     <Compile Include="Assets\Scripts\Scene\SceneControllerBase.cs" />
     <Compile Include="Assets\Scripts\UI\Panels\GameEndPanel.cs" />
     <Compile Include="Assets\Scripts\Scene\GameSceneController.cs" />
@@ -122,6 +122,8 @@
     <Compile Include="Assets\Scripts\Manager\GameUIManager.cs" />
     <Compile Include="Assets\Scripts\Manager\LookPointManager.cs" />
     <Compile Include="Assets\Scripts\GameBase\Event\GameEventParameter.cs" />
+    <Compile Include="Assets\Scripts\Unit\Ai.cs" />
+    <Compile Include="Assets\Scripts\GameBase\Event\HexEvents.cs" />
     <Compile Include="Assets\Scripts\MapGen\HexGrid.cs" />
     <Compile Include="Assets\Scripts\MapGen\HexCell.cs" />
     <Compile Include="Assets\Scripts\GamePlay\GameResource.cs" />
@@ -143,6 +145,7 @@
     <None Include="Assets\Materials\Highlight\Highlight.shader" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Overlay.shader" />
     <None Include="Assets\Materials\River.shader" />
+    <None Include="Assets\3D\KayKit_Adventurers_2.0_FREE\License.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap.shader" />
     <None Include="Assets\Materials\Terrain\Terrain.shader" />
     <None Include="Assets\TextMesh Pro\Shaders\TMPro_Mobile.cginc" />
@@ -164,6 +167,7 @@
     <None Include="Assets\TextMesh Pro\Shaders\TMPro_Surface.cginc" />
     <None Include="Assets\Materials\Features\Feature.shader" />
     <None Include="Assets\TextMesh Pro\Resources\LineBreaking Following Characters.txt" />
+    <None Include="Assets\3D\KayKit_Skeletons_1.1_FREE\License.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Masking.shader" />
     <None Include="Assets\Sounds\Cozy Tunes v1.5.4\Cozy Tunes\Read Me.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF Overlay.shader" />
@@ -853,6 +857,9 @@
     </Reference>
     <Reference Include="Unity.Rider.Editor">
       <HintPath>E:\unity p\HexMapLearn\Library\ScriptAssemblies\Unity.Rider.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.2D.Sprite.Editor">
+      <HintPath>E:\unity p\HexMapLearn\Library\ScriptAssemblies\Unity.2D.Sprite.Editor.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.UI">
       <HintPath>E:\unity p\HexMapLearn\Library\ScriptAssemblies\UnityEngine.UI.dll</HintPath>

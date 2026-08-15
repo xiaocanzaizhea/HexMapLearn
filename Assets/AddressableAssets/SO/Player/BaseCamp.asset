@@ -13,15 +13,20 @@ MonoBehaviour:
   m_Name: BaseCamp
   m_EditorClassIdentifier: 
   id: BaseCamp
-  sprite: {fileID: 10911, guid: 0000000000000000f000000000000000, type: 0}
+  icon: {fileID: 10911, guid: 0000000000000000f000000000000000, type: 0}
   prefab: {fileID: 2091432843326020362, guid: a3311a93e1cbd9946b4f4a6e449f209b, type: 3}
+  team: 0
+  teamColor: {r: 1, g: 1, b: 1, a: 1}
   maxhp: 20
-  attack: 2
   defense: 3
+  canAttack: 0
+  attack: 2
+  attackRange: 1
+  canMove: 0
   moveRange: 0
+  canView: 1
   sightRange: 2
   unitValue: 25
   unitOccupancySize: 1
   unitBuildTimeRequired: 2
   retreatTimeRequired: 3
-  campType: 1
