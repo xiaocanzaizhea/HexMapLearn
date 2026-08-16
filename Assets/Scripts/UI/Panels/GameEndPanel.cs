@@ -22,8 +22,19 @@ public class GameEndPanel : BasePanel
         });
     }
 
-    void BackToVillage()
+    async void BackToVillage()
     {
-        // GameManager.Scene.
+        SceneLoadPanel panel = await GameManager.UI.ShowPanel<SceneLoadPanel>();
+        GameManager.UI.mainCanvas.PrepareFade();
+        GameManager.UI.HidePanel<PlayerMainInfoPanel>();
+        GameManager.UI.HidePanel<GameEndPanel>();
+        GameManager.AssetLoader.LoadScene("Village", p =>
+        {
+            panel.SetPercentage((int)(p * 100));
+        },
+        scene =>
+        {
+            panel.SetPercentage(100);
+        });
     }
 }

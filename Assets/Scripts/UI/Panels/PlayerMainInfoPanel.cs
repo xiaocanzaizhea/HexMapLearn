@@ -20,6 +20,8 @@ public class PlayerMainInfoPanel : BasePanel
 
 	public Button NextRoundButton;
 	
+	public Button GameOverButton;
+	
 	public TMP_Text MessageText;
 	
 	public CanvasGroup MessagePanel;
@@ -35,6 +37,10 @@ public class PlayerMainInfoPanel : BasePanel
 		{
 			GameManager.Event.Broadcast(HexEvents.NextRound.ToString(), GameEventParameter.Empty);
 		}));
+		GameOverButton.onClick.AddListener(() =>
+		{
+			GameManager.Event.Broadcast(HexEvents.GameOver.ToString(), GameEventParameter.Empty);
+		});
 		MessageText.text = "Message";
 		MessagePanel.alpha = 0;
 	}

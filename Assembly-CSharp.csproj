@@ -76,6 +76,7 @@
     <Compile Include="Assets\Scripts\GameBase\Event\IGameEvent.cs" />
     <Compile Include="Assets\Scripts\UI\Panels\Map\HexMapEditor.cs" />
     <Compile Include="Assets\Scripts\Unit\FSM.cs" />
+    <Compile Include="Assets\Scripts\Camera\Mouse.cs" />
     <Compile Include="Assets\Scripts\MapGen\HexMetrics.cs" />
     <Compile Include="Assets\Scripts\Manager\GamePropsBehaviorManager.cs" />
     <Compile Include="Assets\Scripts\UI\MainCanvas.cs" />
