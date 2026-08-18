@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: Melee
   icon: {fileID: 10911, guid: 0000000000000000f000000000000000, type: 0}
-  prefab: {fileID: 6984570236167496044, guid: 95ba7e30d2364e44eb3c54c906630f54, type: 3}
+  prefab: {fileID: 6394738439265962992, guid: 95ba7e30d2364e44eb3c54c906630f54, type: 3}
   team: 0
   teamColor: {r: 1, g: 1, b: 1, a: 1}
   maxhp: 20
@@ -25,7 +25,7 @@ MonoBehaviour:
   canMove: 1
   moveRange: 2
   canView: 1
-  sightRange: 2
+  viewRange: 2
   unitValue: 25
   unitOccupancySize: 1
   unitBuildTimeRequired: 2

@@ -49,6 +49,7 @@
     <Compile Include="Assets\Scripts\UI\Panels\Map\NewMapMenu.cs" />
     <Compile Include="Assets\Scripts\Input\GameInputStateData.cs" />
     <Compile Include="Assets\Scripts\MapGen\HexHash.cs" />
+    <Compile Include="Assets\Scripts\Unit\SO\UnitDataList.cs" />
     <Compile Include="Assets\Scripts\Input\PlayerInput_Old.cs" />
     <Compile Include="Assets\Scripts\MapGen\HexMapGenerator.cs" />
     <Compile Include="Assets\Scripts\GameSound\GameSoundGroupDataSO.cs" />
@@ -56,6 +57,7 @@
     <Compile Include="Assets\InputMap\PlayerInputControl.cs" />
     <Compile Include="Assets\Scripts\UI\Panels\PlayerMainInfoPanel.cs" />
     <Compile Include="Assets\Scripts\Character\Player\PlayerController.cs" />
+    <Compile Include="Assets\Scripts\Unit\Player\Melee.cs" />
     <Compile Include="Assets\Scripts\Manager\GameInputManager.cs" />
     <Compile Include="Assets\Scripts\GameBase\Res\GameAssetLoader.cs" />
     <Compile Include="Assets\Scripts\GameSound\GameSoundDataSO.cs" />
@@ -66,6 +68,7 @@
     <Compile Include="Assets\Scripts\Unit\SO\HexUnitDataSO.cs" />
     <Compile Include="Assets\Scripts\Events\Interfaces\IGameEventHandlers.cs" />
     <Compile Include="Assets\Scripts\GameBuff\GameBuffInstance.cs" />
+    <Compile Include="Assets\Scripts\Unit\Ai\FSM.cs" />
     <Compile Include="Assets\Scripts\GameProps\GamePropDataEntity.cs" />
     <Compile Include="Assets\Scripts\GameProps\GamePropBehaviorBase.cs" />
     <Compile Include="Assets\Scripts\MapGen\ListPool.cs" />
@@ -75,7 +78,11 @@
     <Compile Include="Assets\Scripts\UI\Panels\Map\SaveLoadItem.cs" />
     <Compile Include="Assets\Scripts\GameBase\Event\IGameEvent.cs" />
     <Compile Include="Assets\Scripts\UI\Panels\Map\HexMapEditor.cs" />
+<<<<<<< Updated upstream
     <Compile Include="Assets\Scripts\Unit\FSM.cs" />
+=======
+    <Compile Include="Assets\Scripts\Camera\Mouse.cs" />
+>>>>>>> Stashed changes
     <Compile Include="Assets\Scripts\MapGen\HexMetrics.cs" />
     <Compile Include="Assets\Scripts\Manager\GamePropsBehaviorManager.cs" />
     <Compile Include="Assets\Scripts\UI\MainCanvas.cs" />
@@ -85,6 +92,7 @@
     <Compile Include="Assets\Scripts\Unit\Settings.cs" />
     <Compile Include="Assets\Scripts\Scene\SceneControllerBase.cs" />
     <Compile Include="Assets\Scripts\UI\Panels\GameEndPanel.cs" />
+    <Compile Include="Assets\Scripts\Unit\Ai\Ai.cs" />
     <Compile Include="Assets\Scripts\Scene\GameSceneController.cs" />
     <Compile Include="Assets\Scripts\MapGen\HexFeatureManager.cs" />
     <Compile Include="Assets\Scripts\WeatherType.cs" />
@@ -105,10 +113,13 @@
     <Compile Include="Assets\Scripts\Manager\GameRunTimeManager.cs" />
     <Compile Include="Assets\Scripts\UI\Panels\UnitBuildPanel.cs" />
     <Compile Include="Assets\Scripts\Manager\GameTimeScaleManager.cs" />
+    <Compile Include="Assets\Scripts\Unit\Player\BaseCamp.cs" />
     <Compile Include="Assets\Scripts\UI\Panels\SceneLoadPanel.cs" />
     <Compile Include="Assets\Scripts\Events\Interfaces\IUnitEventHandlers.cs" />
     <Compile Include="Assets\Scripts\UI\Panels\GameStartPanel.cs" />
+    <Compile Include="Assets\Scripts\Unit\Enemy\EnemyUnit.cs" />
     <Compile Include="Assets\Scripts\Utils.cs" />
+    <Compile Include="Assets\Scripts\Unit\Player\PlayerUnit.cs" />
     <Compile Include="Assets\Scripts\UI\Panels\UpgradePanel.cs" />
     <Compile Include="Assets\Scripts\GameBase\MonoSingleton.cs" />
     <Compile Include="Assets\Scripts\MapGen\HexEdgeType.cs" />
@@ -122,7 +133,6 @@
     <Compile Include="Assets\Scripts\Manager\GameUIManager.cs" />
     <Compile Include="Assets\Scripts\Manager\LookPointManager.cs" />
     <Compile Include="Assets\Scripts\GameBase\Event\GameEventParameter.cs" />
-    <Compile Include="Assets\Scripts\Unit\Ai.cs" />
     <Compile Include="Assets\Scripts\GameBase\Event\HexEvents.cs" />
     <Compile Include="Assets\Scripts\MapGen\HexGrid.cs" />
     <Compile Include="Assets\Scripts\MapGen\HexCell.cs" />

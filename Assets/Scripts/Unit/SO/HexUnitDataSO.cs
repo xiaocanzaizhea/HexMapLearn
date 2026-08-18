@@ -28,14 +28,14 @@ public class HexUnitDataSO : ScriptableObject
 
     [Header("视野属性")] 
     public bool canView = true;
-    public int sightRange = 2;
+    public int viewRange = 2;
     
+    [Space(20)]
     // 以下属性只有玩家单位才有
     public int unitValue = 25;
     public int unitOccupancySize = 1;
     public int unitBuildTimeRequired = 2;
     public int retreatTimeRequired = 3;
-    
 }
 
 public enum UnitTeam

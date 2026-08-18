@@ -23,7 +23,7 @@ public interface IState
 [Serializable]
 public class Blackboard
 {
-    
+    public Blackboard(){}
 }
 
 public class FSM

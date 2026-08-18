@@ -52,13 +52,13 @@ public class GameFilesManager
 			gameFileData.currentGameFile = gameFileData.gameFiles.Last().fileName;
             GameManager.Instance.firstTimeEnterGame = true;
 		}
-        GameManager.Instance.playerData = CurrentGameFile.playerData;
+        // GameManager.Instance.playerData = CurrentGameFile.playerData;
         return true;
     }
 
     public void UpdateGameFileData() 
     {
-        CurrentGameFile.playerData = GameManager.Instance.playerData;
+        // CurrentGameFile.playerData = GameManager.Instance.playerData;
     }
 
     public void ResetGameFile() 

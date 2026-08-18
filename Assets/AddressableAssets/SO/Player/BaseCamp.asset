@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: BaseCamp
   icon: {fileID: 10911, guid: 0000000000000000f000000000000000, type: 0}
-  prefab: {fileID: 2091432843326020362, guid: a3311a93e1cbd9946b4f4a6e449f209b, type: 3}
+  prefab: {fileID: 8506677501890625996, guid: a3311a93e1cbd9946b4f4a6e449f209b, type: 3}
   team: 0
   teamColor: {r: 1, g: 1, b: 1, a: 1}
   maxhp: 20
@@ -25,7 +25,7 @@ MonoBehaviour:
   canMove: 0
   moveRange: 0
   canView: 1
-  sightRange: 2
+  viewRange: 2
   unitValue: 25
   unitOccupancySize: 1
   unitBuildTimeRequired: 2

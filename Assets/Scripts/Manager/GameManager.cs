@@ -9,9 +9,6 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoSingleton<GameManager>
 {
-	public List<HexUnitDataSO> playerUnits = new List<HexUnitDataSO>();
-	public List<HexUnitDataSO> enemyUnits = new List<HexUnitDataSO>();
-	
 	public bool firstTimeEnterGame;
 	
 	public bool completeGameInitialze;
@@ -37,16 +34,16 @@ public class GameManager : MonoSingleton<GameManager>
 	private SceneInstance _loadedScene;
 	private string previousSceneName;
 	
-	public PlayerDataInstance playerData;
+	public PlayerDataInstance playerDataInstance;
 	
 	public PlayerDataEntitySO PlayerInitialData;
 	
-	// 所有单位
-	private HexUnit playerUnitsData;
-	public Dictionary<string, HexUnit> PlayerUnitsData = new Dictionary<string, HexUnit>();
+	// 单位查找表，所有的单位
+	private UnitDataList playerDataList;
+	public Dictionary<string, HexUnitDataSO> PlayerDataDic = new Dictionary<string, HexUnitDataSO>();
 	
-	private HexUnit enemiesData;
-	public Dictionary<string, HexUnit> EnemyData = new Dictionary<string, HexUnit>();
+	private UnitDataList enemyDataList;
+	public Dictionary<string, HexUnitDataSO> EnemyData = new Dictionary<string, HexUnitDataSO>();
 	
 	private GameBuffData gameBuffData;
 	public Dictionary<int, GameBuffDataEntity> GameBuffData = new Dictionary<int, GameBuffDataEntity>();
@@ -120,18 +117,18 @@ public class GameManager : MonoSingleton<GameManager>
 	private async void Start()
 	{
 		// player unit data
-		// playerUnitsData = await AssetLoader.LoadAsset<HexUnit>("PlayerUnitsData");
-		// foreach (var data in playerUnitsData.dataSo)
-		// {
-		// 	PlayerUnitsData.Add(data.id, data);
-		// }
-		//
-		// // enemy data
-		// enemiesData = await AssetLoader.LoadAsset<HexUnit>("EnemiesData");
-		// foreach (var data in enemiesData.dataSo)
-		// {
-		// 	EnemyData.Add(data.Id, data);
-		// }
+		playerDataList = await AssetLoader.LoadAsset<UnitDataList>("PlayerDataList");
+		foreach (var data in playerDataList.data)
+		{
+			PlayerDataDic.Add(data.id, data);
+		}
+		
+		// enemy data
+		enemyDataList = await AssetLoader.LoadAsset<UnitDataList>("EnemyDataList");
+		foreach (var data in enemyDataList.data)
+		{
+			EnemyData.Add(data.id, data);
+		}
 		
 		// game buff
 		// gameBuffData = await AssetLoader.LoadAsset<GameBuffData>("GameBuffData");
@@ -182,5 +179,17 @@ public class GameManager : MonoSingleton<GameManager>
 		await UniTask.WaitUntil(()=>sceneControllerInitialFinish);
 		Scene.OnSceneEnter(newScene);
 		sceneControllerInitialFinish = false;
+	}
+
+	public HexUnitDataSO GetUnitDataFromId(string id, int teamId)
+	{
+		if (teamId == 0)
+		{
+			return PlayerDataDic[id];
+		}
+		else
+		{
+			return EnemyData[id];
+		}
 	}
 }

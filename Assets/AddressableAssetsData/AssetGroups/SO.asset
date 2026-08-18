@@ -22,6 +22,16 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 28b02ada7ad465d4fa926cd5e391fdb0
+    m_Address: EnemyDataList
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 53e0608ef33585b4c9c4aa373aae2fd5
+    m_Address: PlayerDataList
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 710dc3bd25dfe854caac2dc41d3833ab, type: 2}
   m_SchemaSet:

@@ -4,25 +4,18 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 
-public class HexUnit : MonoBehaviour {
+public abstract class HexUnit : MonoBehaviour {
 
-	const float rotationSpeed = 180f;
-	const float travelSpeed = 4f;
+	public HexGrid Grid { get; set; }
 
 	public HexUnitDataSO dataSo;
 	
-	private Animator animator;
+	public int Speed => 24;
 
-	public bool IsPlayer => dataSo.team == UnitTeam.Player;
-	public string Id => dataSo.id;
-	public Sprite Icon => dataSo.icon;
+	public int VisionRange => dataSo.viewRange;
 
-	public int Health => 1;
-
-	public int AttackPower => dataSo.attack;
-	public int Defense => dataSo.defense;
-
-	public HexGrid Grid { get; set; }
+	[HideInInspector]
+	public int currentHealth;
 
 	public HexCell Location {
 		get {
@@ -52,31 +45,51 @@ public class HexUnit : MonoBehaviour {
 			transform.localRotation = Quaternion.Euler(0f, value, 0f);
 		}
 	}
-
-	public int Speed {
-		get {
-			return 24;
-		}
-	}
-
-	public int VisionRange {
-		get {
-			return 3;
-		}
-	}
-
+	
 	float orientation;
 
 	List<HexCell> pathToTravel;
+	
+	protected Animator animator;
 
-	private void Awake()
+	protected virtual void Awake()
 	{
 		animator = GetComponentInChildren<Animator>();
 	}
 
-	public void ValidateLocation () {
-		transform.localPosition = location.Position;
+	protected virtual void Start()
+	{
+		
 	}
+
+	protected virtual void OnEnable () {
+		if (location) {
+			ValidateLocation();
+			if (currentTravelLocation) {
+				if (IsPlayerUnit())
+				{
+					Grid.IncreaseVisibility(location, VisionRange);
+					Grid.DecreaseVisibility(currentTravelLocation, VisionRange);
+				}
+				currentTravelLocation = null;
+			}
+		}
+		
+		GameManager.Event.Register(HexEvents.NextRound.ToString(), new GameEvent(OnNextRound));
+	}
+
+	protected virtual void OnDisable()
+	{
+		GameManager.Event.Unregister(HexEvents.NextRound.ToString(), new GameEvent(OnNextRound));
+	}
+
+	protected virtual void Update()
+	{
+		
+	}
+
+	# region normal
+	public void ValidateLocation () => transform.localPosition = location.Position;
 
 	public bool IsValidDestination (HexCell cell) {
 		return cell.IsExplored && !cell.IsUnderwater && !cell.Unit;
@@ -101,7 +114,7 @@ public class HexUnit : MonoBehaviour {
 		Grid.DecreaseVisibility(currentTravelLocation, VisionRange);
 		int currentColumn = currentTravelLocation.ColumnIndex;
 
-		float t = Time.deltaTime * travelSpeed;
+		float t = Time.deltaTime * Settings.travelSpeed;
 		for (int i = 1; i < pathToTravel.Count; i++) {
 			currentTravelLocation = pathToTravel[i];
 			a = c;
@@ -124,7 +137,7 @@ public class HexUnit : MonoBehaviour {
 			c = (b + currentTravelLocation.Position) * 0.5f;
 			Grid.IncreaseVisibility(pathToTravel[i], VisionRange);
 
-			for (; t < 1f; t += Time.deltaTime * travelSpeed) {
+			for (; t < 1f; t += Time.deltaTime * Settings.travelSpeed) {
 				transform.localPosition = Bezier.GetPoint(a, b, c, t);
 				Vector3 d = Bezier.GetDerivative(a, b, c, t);
 				d.y = 0f;
@@ -140,7 +153,7 @@ public class HexUnit : MonoBehaviour {
 		b = location.Position;
 		c = b;
 		Grid.IncreaseVisibility(location, VisionRange);
-		for (; t < 1f; t += Time.deltaTime * travelSpeed) {
+		for (; t < 1f; t += Time.deltaTime * Settings.travelSpeed) {
 			transform.localPosition = Bezier.GetPoint(a, b, c, t);
 			Vector3 d = Bezier.GetDerivative(a, b, c, t);
 			d.y = 0f;
@@ -172,7 +185,7 @@ public class HexUnit : MonoBehaviour {
 		float angle = Quaternion.Angle(fromRotation, toRotation);
 
 		if (angle > 0f) {
-			float speed = rotationSpeed / angle;
+			float speed = Settings.rotationSpeed / angle;
 			for (
 				float t = Time.deltaTime * speed;
 				t < 1f;
@@ -212,9 +225,10 @@ public class HexUnit : MonoBehaviour {
 		}
 		return moveCost;
 	}
-
-	public void Die () {
-		if (location) {
+	# endregion
+	
+	public virtual void Die () {
+		if (location && IsPlayerUnit()) {
 			Grid.DecreaseVisibility(location, VisionRange);
 		}
 		location.Unit = null;
@@ -224,49 +238,26 @@ public class HexUnit : MonoBehaviour {
 	public void Save (BinaryWriter writer) {
 		location.coordinates.Save(writer);
 		writer.Write(orientation);
-		writer.Write(GameManager.RunTimeData.GetUnitNumber(dataSo));
-		writer.Write(dataSo.team == UnitTeam.Player ? 0 : 1);
+		writer.Write(dataSo.id);
+		writer.Write(IsPlayerUnit() ? 0 : 1);
 	}
 
 	public static void Load (BinaryReader reader, HexGrid grid) {
 		HexCoordinates coordinates = HexCoordinates.Load(reader);
 		float orientation = reader.ReadSingle();
-		int num = reader.ReadInt32();
-		HexUnitDataSO hexUnitDataSo;
-		int campNum = reader.ReadInt32();
-		if (campNum == 0)
-		{
-			hexUnitDataSo = GameManager.RunTimeData.playerUnits[num];
-		}
-		else
-		{
-			hexUnitDataSo = GameManager.RunTimeData.enemyUnits[num];
-		}
+		string id = reader.ReadString();
+		int teamId = reader.ReadInt32();
+		HexUnitDataSO hexUnitDataSo = GameManager.Instance.GetUnitDataFromId(id, teamId);
 		grid.AddUnit(
 			Instantiate(hexUnitDataSo.prefab), grid.GetCell(coordinates), orientation
 		);
 	}
 
-	void OnEnable () {
-		if (location) {
-			transform.localPosition = location.Position;
-			if (currentTravelLocation) {
-				Grid.IncreaseVisibility(location, VisionRange);
-				Grid.DecreaseVisibility(currentTravelLocation, VisionRange);
-				currentTravelLocation = null;
-			}
-		}
-	}
+	protected abstract bool IsPlayerUnit();
 
-	public void StartRetreat()
-	{
-		
-	}
+	protected abstract void OnNextRound();
 
-	public void CancelRetreat()
-	{
-		
-	}
+	# region gizmos
 
 	void InitialAnimtorParam()
 	{
@@ -297,4 +288,6 @@ public class HexUnit : MonoBehaviour {
 //			Gizmos.DrawSphere(Bezier.GetPoint(a, b, c, t), 2f);
 //		}
 //	}
+
+	#endregion
 }

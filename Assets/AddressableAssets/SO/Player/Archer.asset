@@ -13,15 +13,20 @@ MonoBehaviour:
   m_Name: Archer
   m_EditorClassIdentifier: 
   id: Archer
-  sprite: {fileID: 10911, guid: 0000000000000000f000000000000000, type: 0}
-  prefab: {fileID: 7026381296043399553, guid: df529deb0c6ddf04090155483b03d025, type: 3}
+  icon: {fileID: 10911, guid: 0000000000000000f000000000000000, type: 0}
+  prefab: {fileID: 6188395633101690041, guid: df529deb0c6ddf04090155483b03d025, type: 3}
+  team: 0
+  teamColor: {r: 1, g: 1, b: 1, a: 1}
   maxhp: 20
-  attack: 2
   defense: 2
+  canAttack: 1
+  attack: 2
+  attackRange: 1
+  canMove: 1
   moveRange: 2
-  sightRange: 2
+  canView: 1
+  viewRange: 2
   unitValue: 25
   unitOccupancySize: 1
   unitBuildTimeRequired: 2
   retreatTimeRequired: 3
-  campType: 1

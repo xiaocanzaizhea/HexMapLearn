@@ -13,7 +13,8 @@ public class InitialHexMap : MonoBehaviour
     private void Start()
     {
         hexGrid = GetComponent<HexGrid>();
-        StartCoroutine(SetupUnit());
+        // baseCamp = 
+        // StartCoroutine(SetupUnit());
     }
 
     IEnumerator SetupUnit()

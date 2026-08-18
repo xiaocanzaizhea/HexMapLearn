@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Map;
 using UnityEngine;
 
@@ -11,7 +12,7 @@ public class GameRunTimeManager
     public int maxUnitCount = 100;
     // 对局中可放置单位
     public List<HexUnitDataSO> playerUnits = new List<HexUnitDataSO>();
-    // 所有敌方单位
+    // 对局中可能生成的敌方单位
     public List<HexUnitDataSO> enemyUnits = new List<HexUnitDataSO>();
     
     // 开始赠送的资源数目
@@ -59,9 +60,7 @@ public class GameRunTimeManager
 
     public GameRunTimeManager()
     {
-        playerUnits = GameManager.Instance.playerUnits;
-        enemyUnits = GameManager.Instance.enemyUnits;
+        this.playerUnits = GameManager.Instance.PlayerDataDic.Values.ToList();
+        this.enemyUnits = GameManager.Instance.EnemyData.Values.ToList();
     }
-    
-    public int GetUnitNumber(HexUnitDataSO playerHexUnitDataEntity) => playerUnits.IndexOf(playerHexUnitDataEntity);
 }

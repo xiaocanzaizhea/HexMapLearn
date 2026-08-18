@@ -29,8 +29,8 @@ public class UnitDetailsPanel : BasePanel
     
     void UpdateUnitDetails(HexUnit unit, bool isMapUnit)
     {
-        this.unitName.text = unit.Id;
-        this.unitImage.sprite = unit.Icon;
+        this.unitName.text = unit.dataSo.id;
+        this.unitImage.sprite = unit.dataSo.icon;
         
         this.unitTarget.text = isMapUnit ? "Map Unit" : "Unit";
         SetupAttributes(unit, isMapUnit);
@@ -38,7 +38,7 @@ public class UnitDetailsPanel : BasePanel
         if (isMapUnit)
         {
             this.unitHealth.gameObject.SetActive(true);
-            this.unitHealth.value = (float)unit.Health / unit.dataSo.maxhp;
+            this.unitHealth.value = (float)unit.currentHealth / unit.dataSo.maxhp;
         }
         else
         {
@@ -57,8 +57,8 @@ public class UnitDetailsPanel : BasePanel
         // 先清理
         foreach (Transform child in attributeParent) Destroy(child.gameObject);
 
-        int attack = isMapUnit ? unit.AttackPower : unit.dataSo.attack;
-        int defense = isMapUnit ? unit.Defense : unit.dataSo.defense;
+        int attack = unit.dataSo.attack;
+        int defense = unit.dataSo.defense;
         
         // 攻击图标
         AddAttributeItem(GameResource.Instance.attackImage, attack.ToString());
@@ -78,14 +78,14 @@ public class UnitDetailsPanel : BasePanel
         }
 
         retreatButton.gameObject.SetActive(true);
-        if (retreatTimeRequired == -1)
-        {
-            SetButton("Retreat", () => unit.StartRetreat());
-        }
-        else
-        {
-            SetButton("CancelRetreat", () => unit.CancelRetreat());
-        }
+        // if (retreatTimeRequired == -1)
+        // {
+        //     SetButton("Retreat", () => unit.StartRetreat());
+        // }
+        // else
+        // {
+        //     SetButton("CancelRetreat", () => unit.CancelRetreat());
+        // }
     }
 
     public void SetButton(string label, Action action)
