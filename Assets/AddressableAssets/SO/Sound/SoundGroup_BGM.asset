@@ -15,6 +15,6 @@ MonoBehaviour:
   GroupName: BGM
   GameSounds:
   - soundName: GameStart
-    audioClip: {fileID: 8300000, guid: e005a4b8a929c0d45ac43825c4617528, type: 3}
+    audioClip: {fileID: 8300000, guid: 4fc7abff7a87e5849bc747bbe85f1f90, type: 3}
   - soundName: Village
-    audioClip: {fileID: 8300000, guid: 01851536725eec54184e94628bbf9b91, type: 3}
+    audioClip: {fileID: 8300000, guid: a939fccfd222a54478bdc090f106cd97, type: 3}

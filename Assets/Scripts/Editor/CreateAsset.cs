@@ -32,7 +32,7 @@ public class CreateAsset : UnityEditor.Editor
         icon
     }
     
-    [MenuItem("Tools/CreateAssetFromExcel/CreatePlayerAsset")]
+    // [MenuItem("Tools/CreateAssetFromExcel/CreatePlayerAsset")]
     static void CreatePlayerAssetFromExcel()
     {
         string excelPath = Path.Combine(Application.dataPath, "Scripts/Editor/DataSO.xlsx");

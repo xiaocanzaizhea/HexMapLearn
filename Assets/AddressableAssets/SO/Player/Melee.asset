@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Melee
   m_EditorClassIdentifier: 
   id: Melee
-  icon: {fileID: 21300000, guid: 81353f4e71ea1124fa22804cdd718f0f, type: 3}
+  icon: {fileID: 21300000, guid: 26a7a5d3f5405d242a3de242c75ab3d3, type: 3}
   prefab: {fileID: 6394738439265962992, guid: 95ba7e30d2364e44eb3c54c906630f54, type: 3}
   team: 0
   teamColor: {r: 1, g: 1, b: 1, a: 1}

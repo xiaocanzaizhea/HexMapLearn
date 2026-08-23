@@ -15,4 +15,4 @@ MonoBehaviour:
   GroupName: UI
   GameSounds:
   - soundName: UI_ClickNormal
-    audioClip: {fileID: 8300000, guid: 47dcd3d82d24c4f4baee6f832c3aa680, type: 3}
+    audioClip: {fileID: 8300000, guid: 44bf4c74c9579f94e9805ebbbb0e1def, type: 3}

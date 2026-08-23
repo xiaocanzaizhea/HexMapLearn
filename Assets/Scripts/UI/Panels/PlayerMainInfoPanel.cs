@@ -21,8 +21,6 @@ public class PlayerMainInfoPanel : BasePanel
 	public Button NextRoundButton;
 	
 	public Button EndButton;
-
-	public Button ChangBgmButton;
 	
 	public TMP_Text MessageText;
 	
@@ -43,11 +41,6 @@ public class PlayerMainInfoPanel : BasePanel
 		EndButton.onClick.AddListener(() =>
 		{
 			GameManager.Event.Broadcast(HexEvents.GameOver.ToString(), GameEventParameter.Empty);
-		});
-		
-		ChangBgmButton.onClick.AddListener(() =>
-		{
-			GameManager.Audio.PlayBGM("Village");
 		});
 		MessageText.text = "Message";
 		MessagePanel.alpha = 0;
