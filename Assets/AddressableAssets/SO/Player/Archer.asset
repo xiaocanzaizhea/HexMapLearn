@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Archer
   m_EditorClassIdentifier: 
   id: Archer
-  icon: {fileID: 10911, guid: 0000000000000000f000000000000000, type: 0}
+  icon: {fileID: 21300000, guid: 795495158289b9b4982736e8520fe22f, type: 3}
   prefab: {fileID: 6188395633101690041, guid: df529deb0c6ddf04090155483b03d025, type: 3}
   team: 0
   teamColor: {r: 1, g: 1, b: 1, a: 1}

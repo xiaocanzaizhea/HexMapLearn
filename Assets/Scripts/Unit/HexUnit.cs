@@ -14,8 +14,20 @@ public abstract class HexUnit : MonoBehaviour {
 
 	public int VisionRange => dataSo.viewRange;
 
-	[HideInInspector]
-	public int currentHealth;
+	public int CurrentHealth
+	{
+		get => currentHealth;
+		set
+		{
+			currentHealth = value;
+			if (currentHealth <= 0)
+			{
+				Die();
+			}
+		}
+	}
+	
+	private int currentHealth;
 
 	public HexCell Location {
 		get {
@@ -89,8 +101,10 @@ public abstract class HexUnit : MonoBehaviour {
 	}
 
 	# region normal
+	// 重新计算世界位置
 	public void ValidateLocation () => transform.localPosition = location.Position;
 
+	// 是否合法位置
 	public bool IsValidDestination (HexCell cell) {
 		return cell.IsExplored && !cell.IsUnderwater && !cell.Unit;
 	}
@@ -226,6 +240,11 @@ public abstract class HexUnit : MonoBehaviour {
 		return moveCost;
 	}
 	# endregion
+
+	public virtual void TakeDamage(HexUnit damageSource, int damage)
+	{
+		CurrentHealth -= damage;
+	}
 	
 	public virtual void Die () {
 		if (location && IsPlayerUnit()) {
@@ -256,6 +275,8 @@ public abstract class HexUnit : MonoBehaviour {
 	protected abstract bool IsPlayerUnit();
 
 	protected abstract void OnNextRound();
+
+	protected abstract void OnClicked();
 
 	# region gizmos
 

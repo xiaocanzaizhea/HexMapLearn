@@ -9,7 +9,6 @@ public class GameSceneManager
     public SceneControllerBase currentScene;
     public void OnSceneEnter(string sceneName) 
     {
-        //Debug.Log("Enter Scene:" + sceneName);
         if (sceneEventCallbacks.ContainsKey(sceneName))
         {
             sceneEventCallbacks[sceneName]?.OnSceneEnter();

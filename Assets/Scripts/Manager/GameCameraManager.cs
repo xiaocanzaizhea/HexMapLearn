@@ -29,7 +29,7 @@ public class GameCameraManager
         GameObject cam = GetCamera(name);
         if (inputProvider) 
         {
-            // cam.GetComponent<EdgeScrollingCamera>().enabled = true;
+            cam.GetComponent<CinemachineInputProvider>().enabled = true;
             return;
         }
         GetCamera(name).SetActive(true);
@@ -39,7 +39,7 @@ public class GameCameraManager
         GameObject cam = GetCamera(name);
         if (inputProvider)
         {
-            // cam.GetComponent<EdgeScrollingCamera>().enabled = false;
+            cam.GetComponent<CinemachineInputProvider>().enabled = false;
             return;
         }
         GetCamera(name).SetActive(false);

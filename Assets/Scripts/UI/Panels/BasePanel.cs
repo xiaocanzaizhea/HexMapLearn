@@ -29,6 +29,12 @@ public abstract class BasePanel : MonoBehaviour
     {
         isShow = true;
         canvasGroup.alpha = 0;
+        var gaussianBlur = GameManager.Instance.MainCamera.GetComponent<GaussianBlur>();
+        if (gaussianBlur != null)
+        {
+            gaussianBlur.enabled = true;
+            gaussianBlur.blurSize = BlurSize();
+        }
     }
 
     public virtual void Hide(UnityAction callback)
@@ -36,6 +42,12 @@ public abstract class BasePanel : MonoBehaviour
         isShow = false;
         canvasGroup.alpha = 1;
         hideCallback = callback;
+        var gaussianBlur = GameManager.Instance.MainCamera.GetComponent<GaussianBlur>();
+        if (gaussianBlur != null)
+        {
+            gaussianBlur.enabled = false;
+            gaussianBlur.blurSize = 0;
+        }
     }
 
     public void SetAlphaSpeed(float speed) 
@@ -61,5 +73,10 @@ public abstract class BasePanel : MonoBehaviour
                 hideCallback?.Invoke();
             }
         }
+    }
+
+    protected virtual int BlurSize()
+    {
+        return 3;
     }
 }

@@ -1,4 +1,6 @@
-﻿public class BaseCamp : PlayerUnit
+﻿using UnityEngine;
+
+public class BaseCamp : PlayerUnit
 {
     public override void Die()
     {

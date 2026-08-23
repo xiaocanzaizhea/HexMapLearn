@@ -18,7 +18,3 @@ MonoBehaviour:
     audioClip: {fileID: 8300000, guid: e005a4b8a929c0d45ac43825c4617528, type: 3}
   - soundName: Village
     audioClip: {fileID: 8300000, guid: 01851536725eec54184e94628bbf9b91, type: 3}
-  - soundName: gs_03
-    audioClip: {fileID: 8300000, guid: 4b523d166452b0e4a97e6a7d9e537edc, type: 3}
-  - soundName: gs_04
-    audioClip: {fileID: 8300000, guid: 3cab3853df44a4e40aaff53917a0b66d, type: 3}

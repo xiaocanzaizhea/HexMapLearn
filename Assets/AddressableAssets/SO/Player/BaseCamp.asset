@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: BaseCamp
   m_EditorClassIdentifier: 
   id: BaseCamp
-  icon: {fileID: 10911, guid: 0000000000000000f000000000000000, type: 0}
+  icon: {fileID: 21300000, guid: 46d50b7b838fff348884ed08d04f670e, type: 3}
   prefab: {fileID: 8506677501890625996, guid: a3311a93e1cbd9946b4f4a6e449f209b, type: 3}
   team: 0
   teamColor: {r: 1, g: 1, b: 1, a: 1}

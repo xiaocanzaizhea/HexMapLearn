@@ -5,5 +5,5 @@ using UnityEngine;
 
 public interface OnUnitSelection
 {
-    public void onUnitSelected(Unit unit);
+    public void onUnitSelected(HexUnit unit);
 }

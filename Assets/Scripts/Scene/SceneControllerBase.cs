@@ -42,18 +42,28 @@ public class SceneControllerBase : MonoBehaviour
     private void OnEnable()
     {
         GameManager.Event.Register(HexEvents.GameStart.ToString(), new GameEvent(OnGameStart));
+        GameManager.Event.Register(HexEvents.GameOver.ToString(), new GameEvent(OnGameOver));
     }
 
     private void OnDisable()
     {
         GameManager.Event.Unregister(HexEvents.GameStart.ToString(), new GameEvent(OnGameStart));
+        GameManager.Event.Unregister(HexEvents.GameOver.ToString(), new GameEvent(OnGameOver));
     }
 
     void OnGameStart()
     {
         if(!isGameScene) return;
+        // 增加玩家资源数
         GameManager.Event.Broadcast(HexEvents.ResourceChange.ToString(),
             new GameEventParameter<int>(GameManager.RunTimeData.startResourceCount));
+    }
+
+    async void OnGameOver()
+    {
+        if(!isGameScene) return;
+        Debug.Log("Game Over");
+        await GameManager.UI.ShowPanel<GameEndPanel>();
     }
 
     protected virtual void Update()

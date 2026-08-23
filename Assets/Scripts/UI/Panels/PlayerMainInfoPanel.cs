@@ -20,6 +20,10 @@ public class PlayerMainInfoPanel : BasePanel
 
 	public Button NextRoundButton;
 	
+	public Button EndButton;
+
+	public Button ChangBgmButton;
+	
 	public TMP_Text MessageText;
 	
 	public CanvasGroup MessagePanel;
@@ -35,6 +39,16 @@ public class PlayerMainInfoPanel : BasePanel
 		{
 			GameManager.Event.Broadcast(HexEvents.NextRound.ToString(), GameEventParameter.Empty);
 		}));
+		
+		EndButton.onClick.AddListener(() =>
+		{
+			GameManager.Event.Broadcast(HexEvents.GameOver.ToString(), GameEventParameter.Empty);
+		});
+		
+		ChangBgmButton.onClick.AddListener(() =>
+		{
+			GameManager.Audio.PlayBGM("Village");
+		});
 		MessageText.text = "Message";
 		MessagePanel.alpha = 0;
 	}
@@ -73,5 +87,10 @@ public class PlayerMainInfoPanel : BasePanel
 	void UpdateUnitCountText()
 	{
 		UnitCountText.text = GameManager.RunTimeData.UnitCount.ToString() + " / " + GameManager.RunTimeData.maxUnitCount.ToString();
+	}
+
+	protected override int BlurSize()
+	{
+		return 0;
 	}
 }

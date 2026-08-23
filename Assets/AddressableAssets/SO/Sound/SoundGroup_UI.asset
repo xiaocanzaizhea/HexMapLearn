@@ -12,5 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c38a37697cecbb4d9fc423d6d390ba0, type: 3}
   m_Name: SoundGroup_UI
   m_EditorClassIdentifier: 
-  GroupName: SoundGroup_UI
-  GameSounds: []
+  GroupName: UI
+  GameSounds:
+  - soundName: UI_ClickNormal
+    audioClip: {fileID: 8300000, guid: 47dcd3d82d24c4f4baee6f832c3aa680, type: 3}

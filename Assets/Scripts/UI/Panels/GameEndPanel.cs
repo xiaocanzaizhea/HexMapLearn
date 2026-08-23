@@ -16,14 +16,24 @@ public class GameEndPanel : BasePanel
     {
         titleText.text = "Game End";
         detailText.text = "";
+        GameManager.UI.HidePanel<PlayerMainInfoPanel>();
         backToVillageBtn.onClick.AddListener(() =>
         {
             BackToVillage();
         });
     }
 
-    void BackToVillage()
+    async void BackToVillage()
     {
-        // GameManager.Scene.
+        SceneLoadPanel panel = await GameManager.UI.ShowPanel<SceneLoadPanel>();
+        GameManager.UI.mainCanvas.PrepareFade();
+        await GameManager.AssetLoader.LoadScene("VillageScene", p =>
+        {
+            panel.SetPercentage((int)p*100);
+        }, scene =>
+        {
+            panel.SetPercentage(100);
+            GameManager.UI.HidePanel<GameEndPanel>();
+        });
     }
 }

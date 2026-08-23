@@ -28,7 +28,7 @@ public class AI_IdleState : IState
     {
     }
 
-    public void OnUpdate()
+    public void OnNextRound()
     {
         idleTimer += Time.deltaTime;
         if (idleTimer > blackboard.idleTime)
@@ -57,7 +57,7 @@ public class AI_MoveState : IState
     {
     }
 
-    public void OnUpdate()
+    public void OnNextRound()
     {
     }
 }
@@ -78,6 +78,6 @@ public class Ai : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        fsm.OnUpdate();
+        fsm.OnNextRound();
     }
 }

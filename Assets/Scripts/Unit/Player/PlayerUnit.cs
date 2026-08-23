@@ -19,7 +19,7 @@ public class PlayerUnit : HexUnit
     protected override void Update()
     {
         base.Update();
-        fsm.OnUpdate();
+        fsm.OnNextRound();
     }
 
     protected override bool IsPlayerUnit()
@@ -30,6 +30,11 @@ public class PlayerUnit : HexUnit
     protected override void OnNextRound()
     {
         hasMoved = false;
+    }
+
+    protected override void OnClicked()
+    {
+        
     }
 
     public override void Die()
@@ -67,7 +72,7 @@ public class PlayerAI_IdleState : IState
 
     public void OnExit() { }
 
-    public void OnUpdate()
+    public void OnNextRound()
     {
         
     }
@@ -94,7 +99,7 @@ public class PlayerAI_MoveState : IState
         playerBlackBoard.animator.SetBool(Settings.IsMoving, false);
     }
 
-    public void OnUpdate()
+    public void OnNextRound()
     {
         
     }

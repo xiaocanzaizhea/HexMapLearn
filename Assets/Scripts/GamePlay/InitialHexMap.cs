@@ -7,14 +7,12 @@ using Random = UnityEngine.Random;
 [RequireComponent(typeof(HexGrid))]
 public class InitialHexMap : MonoBehaviour
 {
-    public HexUnit baseCamp;
     private HexGrid hexGrid;
     
     private void Start()
     {
         hexGrid = GetComponent<HexGrid>();
-        // baseCamp = 
-        // StartCoroutine(SetupUnit());
+        StartCoroutine(SetupUnit());
     }
 
     IEnumerator SetupUnit()
@@ -22,7 +20,7 @@ public class InitialHexMap : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
         GameManager.Event.Broadcast(HexEvents.GameStart.ToString(), GameEventParameter.Empty);
         SetupBaseCamp();
-        // SetupEnemies();
+        SetupEnemies();
     }
 
     void SetupBaseCamp()
@@ -30,7 +28,8 @@ public class InitialHexMap : MonoBehaviour
         HexCell randomCell = GetRandomCell();
         if (randomCell)
         {
-            var baseCampPrefab = Instantiate(baseCamp.dataSo.prefab);
+            HexUnitDataSO baseCamp = GameManager.Instance.PlayerDataDic["BaseCamp"];
+            var baseCampPrefab = Instantiate(baseCamp.prefab);
             hexGrid.AddUnit(baseCampPrefab, randomCell, Random.Range(0, 360), false);
             Debug.Log("基础营地生成成功，位置在" + randomCell.coordinates.ToString());
         }
@@ -42,19 +41,20 @@ public class InitialHexMap : MonoBehaviour
 
     void SetupEnemies()
     {
-        // for (int i = 0; i < 1; i++)
-        // {
-        //     HexCell randomCell = GetRandomCell();
-        //     if (randomCell)
-        //     {
-        //         var unit = Instantiate(GameManager.RunTimeData.enemyUnits[0].prefab);
-        //         hexGrid.AddUnit(unit, randomCell, Random.Range(0, 360), false);
-        //     }
-        //     else
-        //     {
-        //         Debug.Log("敌人未生成成功");
-        //     }
-        // }
+        for (int i = 0; i < GameManager.RunTimeData.enemyUnitStartCount; i++)
+        {
+            HexCell randomCell = GetRandomCell();
+            if (randomCell)
+            {
+                var unit = Instantiate(GameManager.Instance.EnemyDataDic["Goblin"].prefab);
+                hexGrid.AddUnit(unit, randomCell, Random.Range(0, 360), false);
+                Debug.Log("敌人生成成功");
+            }
+            else
+            {
+                Debug.Log("敌人未生成成功");
+            }
+        }
     }
 
     private HexCell GetRandomCell()

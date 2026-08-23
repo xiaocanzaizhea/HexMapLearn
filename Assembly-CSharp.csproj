@@ -47,6 +47,7 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\MapGen\HexGridChunk.cs" />
     <Compile Include="Assets\Scripts\UI\Panels\Map\NewMapMenu.cs" />
+    <Compile Include="Assets\Scripts\UI\Items\GameSelectionItem.cs" />
     <Compile Include="Assets\Scripts\Input\GameInputStateData.cs" />
     <Compile Include="Assets\Scripts\MapGen\HexHash.cs" />
     <Compile Include="Assets\Scripts\Unit\SO\UnitDataList.cs" />
@@ -54,6 +55,7 @@
     <Compile Include="Assets\Scripts\MapGen\HexMapGenerator.cs" />
     <Compile Include="Assets\Scripts\GameSound\GameSoundGroupDataSO.cs" />
     <Compile Include="Assets\Scripts\GamePlay\RandomMap.cs" />
+    <Compile Include="Assets\Scripts\Unit\PlayerUnit.cs" />
     <Compile Include="Assets\InputMap\PlayerInputControl.cs" />
     <Compile Include="Assets\Scripts\UI\Panels\PlayerMainInfoPanel.cs" />
     <Compile Include="Assets\Scripts\Character\Player\PlayerController.cs" />
@@ -70,19 +72,16 @@
     <Compile Include="Assets\Scripts\GameBuff\GameBuffInstance.cs" />
     <Compile Include="Assets\Scripts\Unit\Ai\FSM.cs" />
     <Compile Include="Assets\Scripts\GameProps\GamePropDataEntity.cs" />
+    <Compile Include="Assets\Shader\GaussianBlur\GaussianBlur.cs" />
     <Compile Include="Assets\Scripts\GameProps\GamePropBehaviorBase.cs" />
     <Compile Include="Assets\Scripts\MapGen\ListPool.cs" />
     <Compile Include="Assets\Scripts\Manager\GameFilesManager.cs" />
+    <Compile Include="Assets\Scripts\Unit\Enemy\Goblin.cs" />
     <Compile Include="Assets\Scripts\MapGen\Bezier.cs" />
     <Compile Include="Assets\Scripts\Manager\GameSceneManager.cs" />
     <Compile Include="Assets\Scripts\UI\Panels\Map\SaveLoadItem.cs" />
     <Compile Include="Assets\Scripts\GameBase\Event\IGameEvent.cs" />
     <Compile Include="Assets\Scripts\UI\Panels\Map\HexMapEditor.cs" />
-<<<<<<< Updated upstream
-    <Compile Include="Assets\Scripts\Unit\FSM.cs" />
-=======
-    <Compile Include="Assets\Scripts\Camera\Mouse.cs" />
->>>>>>> Stashed changes
     <Compile Include="Assets\Scripts\MapGen\HexMetrics.cs" />
     <Compile Include="Assets\Scripts\Manager\GamePropsBehaviorManager.cs" />
     <Compile Include="Assets\Scripts\UI\MainCanvas.cs" />
@@ -98,6 +97,7 @@
     <Compile Include="Assets\Scripts\WeatherType.cs" />
     <Compile Include="Assets\Scripts\MapGen\HexCoordinates.cs" />
     <Compile Include="Assets\Scripts\MapGen\HexDirection.cs" />
+    <Compile Include="Assets\Scripts\UI\Panels\GameDifficultySelection.cs" />
     <Compile Include="Assets\Scripts\Camera\EdgeScrollingCamera.cs" />
     <Compile Include="Assets\Scripts\UI\Panels\VillagePanel\SmithyPanel.cs" />
     <Compile Include="Assets\Scripts\GameBase\Event\GameEventManager.cs" />
@@ -106,6 +106,7 @@
     <Compile Include="Assets\Scripts\Manager\GameAudioManager.cs" />
     <Compile Include="Assets\Scripts\Events\Interfaces\OnUnitSelection.cs" />
     <Compile Include="Assets\Scripts\Events\Interfaces\IResource.cs" />
+    <Compile Include="Assets\Scripts\Unit\Melee.cs" />
     <Compile Include="Assets\Scripts\UI\Panels\PauseMenuPanel.cs" />
     <Compile Include="Assets\Scripts\Events\Interfaces\IWeatherEventHandlers.cs" />
     <Compile Include="Assets\Scripts\GameBase\Singleton.cs" />
@@ -119,7 +120,9 @@
     <Compile Include="Assets\Scripts\UI\Panels\GameStartPanel.cs" />
     <Compile Include="Assets\Scripts\Unit\Enemy\EnemyUnit.cs" />
     <Compile Include="Assets\Scripts\Utils.cs" />
+    <Compile Include="Assets\Scripts\Scene\Attribute\SceneControllerAttribute.cs" />
     <Compile Include="Assets\Scripts\Unit\Player\PlayerUnit.cs" />
+    <Compile Include="Assets\Scripts\Unit\BaseCamp.cs" />
     <Compile Include="Assets\Scripts\UI\Panels\UpgradePanel.cs" />
     <Compile Include="Assets\Scripts\GameBase\MonoSingleton.cs" />
     <Compile Include="Assets\Scripts\MapGen\HexEdgeType.cs" />
@@ -146,8 +149,8 @@
     <Compile Include="Assets\Scripts\Unit\HexUnit.cs" />
     <Compile Include="Assets\Scripts\GameBase\Save&amp;Load\GameFile.cs" />
     <Compile Include="Assets\Scripts\UI\Panels\Map\HexGameUI.cs" />
-    <Compile Include="Assets\Scripts\Scene\SceneControllerAttribute.cs" />
     <Compile Include="Assets\Scripts\Manager\GameMessageManager.cs" />
+    <Compile Include="Assets\Scripts\Unit\Player\StartDoor.cs" />
     <Compile Include="Assets\Scripts\UI\Panels\BasePanel.cs" />
     <Compile Include="Assets\Scripts\Manager\GameCameraManager.cs" />
     <Compile Include="Assets\Scripts\MapGen\HexCellShaderData.cs" />
@@ -156,6 +159,8 @@
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Overlay.shader" />
     <None Include="Assets\Materials\River.shader" />
     <None Include="Assets\3D\KayKit_Adventurers_2.0_FREE\License.txt" />
+    <None Include="Assets\Misc\代办.txt" />
+    <None Include="Assets\Sounds\SoundEffect\readme.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap.shader" />
     <None Include="Assets\Materials\Terrain\Terrain.shader" />
     <None Include="Assets\TextMesh Pro\Shaders\TMPro_Mobile.cginc" />
@@ -177,9 +182,10 @@
     <None Include="Assets\TextMesh Pro\Shaders\TMPro_Surface.cginc" />
     <None Include="Assets\Materials\Features\Feature.shader" />
     <None Include="Assets\TextMesh Pro\Resources\LineBreaking Following Characters.txt" />
+    <None Include="Assets\Shader\GaussianBlur\GaussianBlur.shader" />
     <None Include="Assets\3D\KayKit_Skeletons_1.1_FREE\License.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Masking.shader" />
-    <None Include="Assets\Sounds\Cozy Tunes v1.5.4\Cozy Tunes\Read Me.txt" />
+    <None Include="Assets\Sounds\BGM\Cozy Tunes v1.5.4\Cozy Tunes\Read Me.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF Overlay.shader" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap-Mobile.shader" />
     <None Include="Assets\Materials\Estuary.shader" />

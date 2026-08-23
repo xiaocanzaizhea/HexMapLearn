@@ -38,7 +38,7 @@ public class UnitDetailsPanel : BasePanel
         if (isMapUnit)
         {
             this.unitHealth.gameObject.SetActive(true);
-            this.unitHealth.value = (float)unit.currentHealth / unit.dataSo.maxhp;
+            this.unitHealth.value = (float)unit.CurrentHealth / unit.dataSo.maxhp;
         }
         else
         {

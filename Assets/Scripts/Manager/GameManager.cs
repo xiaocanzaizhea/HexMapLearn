@@ -9,6 +9,8 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoSingleton<GameManager>
 {
+	public Camera MainCamera;
+	
 	public bool firstTimeEnterGame;
 	
 	public bool completeGameInitialze;
@@ -43,7 +45,7 @@ public class GameManager : MonoSingleton<GameManager>
 	public Dictionary<string, HexUnitDataSO> PlayerDataDic = new Dictionary<string, HexUnitDataSO>();
 	
 	private UnitDataList enemyDataList;
-	public Dictionary<string, HexUnitDataSO> EnemyData = new Dictionary<string, HexUnitDataSO>();
+	public Dictionary<string, HexUnitDataSO> EnemyDataDic = new Dictionary<string, HexUnitDataSO>();
 	
 	private GameBuffData gameBuffData;
 	public Dictionary<int, GameBuffDataEntity> GameBuffData = new Dictionary<int, GameBuffDataEntity>();
@@ -116,18 +118,19 @@ public class GameManager : MonoSingleton<GameManager>
 
 	private async void Start()
 	{
+		// enemy data
+		enemyDataList = await AssetLoader.LoadAsset<UnitDataList>("EnemyDataList");
+		foreach (var data in enemyDataList.data)
+		{
+			Debug.Log(data.id);
+			EnemyDataDic.Add(data.id, data);
+		}
+		
 		// player unit data
 		playerDataList = await AssetLoader.LoadAsset<UnitDataList>("PlayerDataList");
 		foreach (var data in playerDataList.data)
 		{
 			PlayerDataDic.Add(data.id, data);
-		}
-		
-		// enemy data
-		enemyDataList = await AssetLoader.LoadAsset<UnitDataList>("EnemyDataList");
-		foreach (var data in enemyDataList.data)
-		{
-			EnemyData.Add(data.id, data);
 		}
 		
 		// game buff
@@ -173,7 +176,6 @@ public class GameManager : MonoSingleton<GameManager>
 		Input.ResetAllButtonValueOnLateUpdate();
 	}
 	
-	// 场景改变时， 调用新场景OnSceneEnter
 	private async void OnSceneChanged(string newScene)
 	{
 		await UniTask.WaitUntil(()=>sceneControllerInitialFinish);
@@ -183,13 +185,7 @@ public class GameManager : MonoSingleton<GameManager>
 
 	public HexUnitDataSO GetUnitDataFromId(string id, int teamId)
 	{
-		if (teamId == 0)
-		{
-			return PlayerDataDic[id];
-		}
-		else
-		{
-			return EnemyData[id];
-		}
+		if (teamId == 0) return PlayerDataDic[id];
+		else return EnemyDataDic[id];
 	}
 }

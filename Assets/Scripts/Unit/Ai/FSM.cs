@@ -17,7 +17,7 @@ public interface IState
 {
     void OnEnter();
     void OnExit();
-    void OnUpdate();
+    void OnNextRound();
 }
 
 [Serializable]
@@ -65,8 +65,8 @@ public class FSM
         currentState.OnEnter();
     }
 
-    public void OnUpdate()
+    public void OnNextRound()
     {
-        currentState.OnUpdate();
+        currentState.OnNextRound();
     }
 }

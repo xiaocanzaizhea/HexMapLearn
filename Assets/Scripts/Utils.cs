@@ -12,6 +12,7 @@ public class Utils : MonoBehaviour
         }
     }
     
+    // 获取鼠标下的位置
     public static HexCell GetCellUnderCursor () {
         return
             Grid.GetCell(Camera.main.ScreenPointToRay(Input.mousePosition));
@@ -29,7 +30,8 @@ public class Utils : MonoBehaviour
         return !cell.IsUnderwater && !cell.Unit;
     }
 
-    public static HexCell GetRandomCell(HexCell location, int dis = 1)
+    // 获取随机位置
+    public static HexCell GetValidRandomCellInDistance(HexCell location, int dis = 1)
     {
         if (dis <= 0 || location == null) return null;
         
@@ -55,5 +57,11 @@ public class Utils : MonoBehaviour
         }
 
         return null;
+    }
+
+    // 获取两个单位之间的距离
+    public static int GetDistance(HexUnit a, HexUnit b)
+    {
+        return a.Location.coordinates.DistanceTo(b.Location.coordinates);
     }
 }

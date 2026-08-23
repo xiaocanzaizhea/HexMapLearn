@@ -41,9 +41,11 @@ public class HexGrid : MonoBehaviour{
 
 	int currentCenterColumnIndex = -1;
 
+	[HideInInspector]
 	[Tooltip("友方单位列表")]
 	public List<HexUnit> playerUnits = new List<HexUnit>();
 	
+	[HideInInspector]
 	[Tooltip("敌方单位列表")]
 	public List<HexUnit> enemyUnits = new List<HexUnit>();
 
@@ -73,10 +75,10 @@ public class HexGrid : MonoBehaviour{
 		unit.Location = location;
 		unit.Orientation = orientation;
 
-		if (unit is HexUnit player)
-			playerUnits.Add(player);
-		else if (unit is HexUnit enemy)
-			enemyUnits.Add(enemy);
+		if (unit.dataSo.team == UnitTeam.Player)
+			playerUnits.Add(unit);
+		else
+			enemyUnits.Add(unit);
 		
 		if(trigger) 
 			GameManager.Event.Broadcast(HexEvents.UnitSpawn.ToString(), 

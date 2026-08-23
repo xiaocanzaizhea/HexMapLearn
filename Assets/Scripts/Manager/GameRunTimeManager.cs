@@ -35,7 +35,7 @@ public class GameRunTimeManager
         set;
     }
 
-    public int enemyUnitStartCount;
+    public int enemyUnitStartCount = 1;
     
     // 玩家资源数
     public int ResourceCount
@@ -60,7 +60,6 @@ public class GameRunTimeManager
 
     public GameRunTimeManager()
     {
-        this.playerUnits = GameManager.Instance.PlayerDataDic.Values.ToList();
-        this.enemyUnits = GameManager.Instance.EnemyData.Values.ToList();
+        
     }
 }
