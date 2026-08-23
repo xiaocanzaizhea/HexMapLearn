@@ -280,12 +280,6 @@ public abstract class HexUnit : MonoBehaviour {
 
 	# region gizmos
 
-	void InitialAnimtorParam()
-	{
-		animator.SetBool(Settings.IsMoving, false);
-		animator.SetBool(Settings.IsDead, false);
-	}
-
 //	void OnDrawGizmos () {
 //		if (pathToTravel == null || pathToTravel.Count == 0) {
 //			return;
